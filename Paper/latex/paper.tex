@@ -271,10 +271,18 @@ The contributions of this paper are as follows:
 
 
 \section{RAX}
-The following is an introduction to the process of RAX construction.
+The following is an introduction to the process of RAX construction, as shown in Figure \ref{fig:flow-chart}.
 During the analysis phase,architecture-related factors are obtained through the Commit tool for selection.
 A scanning tool is built to get potential modification workload.
 Finally,an appropriate machine learning model is selected as a classification.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{flow-chart.pdf}
+  \caption{Flow chart for method to build RAX}
+  \label{fig:flow-chart}
+  \Description{Flow chart for method to build RAX}
+\end{figure}
 
 \subsection{Motivation}
 The section provides a validity analysis of porting-related factors on RAX.
@@ -293,8 +301,16 @@ We then calculated the Spearman correlation coefficient and conducted significan
 The Spearman coefficient is 0.608, with a P-value of 1.39e-14, which is less than 0.01.
 This indicates a significant correlation between the two variables.
 The results suggest that CC has a moderate positive correlation with porting difficulty.
-This is because developers need a holistic understanding of the project during the porting process, and CC can represent the overall complexity of the project, potentially reflecting porting barriers, as the picture shows:
+This is because developers need a holistic understanding of the project during the porting process, and CC can represent the overall complexity of the project, potentially reflecting porting barriers, as shown in Figure \ref{fig:relationship}.
 Secondly,we focus on the code associated with architecture in the project,with the goal of predicting porting workload through these code.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{relationship.pdf}
+  \caption{The relationship between score and CC}
+  \label{fig:relationship}
+  \Description{The relationship between score and CC}
+\end{figure}
 
 \subsubsection{Factor2:Arch\_code}
 
@@ -408,7 +424,7 @@ In the realm of scientific computing, Tine Blaise et al. [9] accomplished the po
 In the context of architectural migration of foundational software and libraries, Cheng Yuanhu et al. [3] designed an embedded multi-instruction set processor,addressing the software ecosystem challenges present in the RISC-V embedded domain.
 As a result, auxiliary efforts in porting are highlighted as valuable endeavors.
 This tool approaches code complexity from the perspective of its evaluation role in software evolution and maintenance,considering its influence on porting complexity assessment.
-Alvares et al. [11] proposed using the development team's "tolerance" for code complexity to infer team development capabilities and performance indicators for projects.
+Alvares et al. [11] proposed using the development team's ``tolerance'' for code complexity to infer team development capabilities and performance indicators for projects.
 Vard et al. [12] emphasized that the internal quality of software impacts developers' capabilities and maintenance durations.
 They conducted a comprehensive study on various existing code complexity metrics' validity and suggested incorporating empirically observed code features as complexity triggers.
 
