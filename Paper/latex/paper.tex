@@ -11,7 +11,7 @@
 %% for your publication.
 %%
 %%
-\documentclass[sigconf,screen,review,anonymous]{acmart}
+\documentclass[sigconf,screen,review]{acmart}
 
 \usepackage{multirow}
 
@@ -92,77 +92,14 @@
 %% Of note is the shared affiliation of the first two authors, and the
 %% "authornote" and "authornotemark" commands
 %% used to denote shared contribution to the research.
-\author{Ben Trovato}
-\authornote{Both authors contributed equally to this research.}
-\email{trovato@corporation.com}
-\orcid{1234-5678-9012}
-\author{G.K.M. Tobin}
-\authornotemark[1]
-\email{webmaster@marysville-ohio.com}
+\author{Yuxuan Wang}
+\email{wangyuxuan22@otcaix.iscas.ac.cn}
 \affiliation{%
-  \institution{Institute for Clarity in Documentation}
-  \streetaddress{P.O. Box 1212}
-  \city{Dublin}
-  \state{Ohio}
-  \country{USA}
-  \postcode{43017-6221}
+  \institution{Institute of Software, Chinese Academy of Sciences}
+  \city{Haidian}
+  \state{Beijing}
+  \country{China}
 }
-
-\author{Lars Th{\o}rv{\"a}ld}
-\affiliation{%
-  \institution{The Th{\o}rv{\"a}ld Group}
-  \streetaddress{1 Th{\o}rv{\"a}ld Circle}
-  \city{Hekla}
-  \country{Iceland}}
-\email{larst@affiliation.org}
-
-\author{Valerie B\'eranger}
-\affiliation{%
-  \institution{Inria Paris-Rocquencourt}
-  \city{Rocquencourt}
-  \country{France}
-}
-
-\author{Aparna Patel}
-\affiliation{%
- \institution{Rajiv Gandhi University}
- \streetaddress{Rono-Hills}
- \city{Doimukh}
- \state{Arunachal Pradesh}
- \country{India}}
-
-\author{Huifen Chan}
-\affiliation{%
-  \institution{Tsinghua University}
-  \streetaddress{30 Shuangqing Rd}
-  \city{Haidian Qu}
-  \state{Beijing Shi}
-  \country{China}}
-
-\author{Charles Palmer}
-\affiliation{%
-  \institution{Palmer Research Laboratories}
-  \streetaddress{8600 Datapoint Drive}
-  \city{San Antonio}
-  \state{Texas}
-  \country{USA}
-  \postcode{78229}}
-\email{cpalmer@prl.com}
-
-\author{John Smith}
-\affiliation{%
-  \institution{The Th{\o}rv{\"a}ld Group}
-  \streetaddress{1 Th{\o}rv{\"a}ld Circle}
-  \city{Hekla}
-  \country{Iceland}}
-\email{jsmith@affiliation.org}
-
-\author{Julius P. Kumquat}
-\affiliation{%
-  \institution{The Kumquat Consortium}
-  \city{New York}
-  \country{USA}}
-\email{jpkumquat@consortium.net}
 
 %%
 %% By default, the full list of authors will be used in the page
@@ -170,7 +107,7 @@
 %% other information printed in the page headers. This command allows
 %% the author to define a more concise list
 %% of authors' names for this purpose.
-\renewcommand{\shortauthors}{Trovato et al.}
+\renewcommand{\shortauthors}{Yuxuan et al.}
 
 %%
 %% The abstract is a short summary of the work to be presented in the
@@ -222,8 +159,8 @@ We establish a high-quality data set of software porting complexity, and select 
 %%
 %% Keywords. The author(s) should pick words that accurately describe
 %% the work being presented. Separate the keywords with commas.
-\keywords{Do, Not, Us, This, Code, Put, the, Correct, Terms, for,
-  Your, Paper}
+\keywords{ISA(Instruction set architecture), RISC-V, Porting Complexity Evaluation}
+
 %% A "teaser" image appears between the author and affiliation
 %% information and the body of the document, and typically spans the
 %% page.
@@ -245,26 +182,21 @@ We establish a high-quality data set of software porting complexity, and select 
 \maketitle
 
 \section{Introduction}
-RISC-V is an emerging open-source and reduced ISA which avoids potential risks such as intellectual property issues.
+RISC-V is an emerging open-source and reduced ISA which avoids potential risks such as intellectual property issues \cite{2014The}.
 Compared to traditional architectures, RISC-V has a simpler design, which lowers R\&D threshold.
-Its modularization and scalability allows developers to customize the architecture flexibly to adapt to different application scenarios.
+Its modularization and scalability allows developers to customize the architecture flexibly to adapt to different application scenarios \cite{osti_1560132}.
 
-Although RISC-V has already made initial progress in having a relatively complete tool chain, it still requires the support of a large number of application software.
+Although RISC-V has already made initial progress in having a relatively complete tool chain, it still requires the support of a large number of application software \cite{2019Notary}.
 However, establishing a mature software ecosystem still face challenges.
 Currently, there is a lack of standardized metrics to measure software architecture portability,and porting planning relies on domain expertise.
-Du Jiman et al. have developed a basic statistical evaluation plan for CPU architecture code in project,however,their work lacks a thorough validity analysis and comparison of factors,and fails to consider the complexity associated with the software operation and maintenance process.
+Du Jiman et al. have developed a basic statistical evaluation plan for CPU architecture code in project \cite{2023du}, however, their work lacks a thorough validity analysis and comparison of factors,and fails to consider the complexity associated with the software operation and maintenance process.
 It is difficult for developers to estimate the complexity of the porting project and accurately allocate the necessary resources,and there are also challenges related to variations in task difficulty and developer proficiency.
 In order to solve this problem,one of the methods is to make analogies with adapted projects to gain porting experience,but it is difficult to extract factors by manual sorting;Even if developers have sensitivity to architecture-related modules, it is still challenging to accurately obtain the workload.
 RAX can provide developers with accurate evaluation, recommend software with different levels of porting difficulty based on their skill levels.
 The contributions of this paper are as follows:
 \begin{enumerate}
-  \item Firstly, we conducted analysis on selection of factors related the porting evaluation.
-  We analyzed the modified content obtained from the Git Commit tool, selecting important factors that are suitable for automatic detection and collection.
-  Simultaneously,we investigated the significance of code complexity metrics in the context of porting work and incorporated Cyclomatic Complexity as a factor to assess the overall complexity of  the project.
-  \item We implemented RAX porting complexity evaluation tool.
-  Projects were obtained from openEuler and GitHub.
-  Based on porting-related factors, we designed a scanning tool to collect porting complexity vectors.
-  Through a comprehensive evaluation method,we established a high-quality data set and ultimately selected random forest machine learning model as the classifier for RAX.
+  \item Firstly, we conducted analysis on selection of factors related the porting evaluation,investigated the significance of code complexity metrics in the context of porting work and incorporated Cyclomatic Complexity as a factor to assess the overall complexity of  the project.
+  \item Based on porting-related factors, we designed a scanning tool to collect porting complexity vectors and ultimately selected random forest machine learning model as the classifier for RAX.
   \item Evaluate the effectiveness of RAX.
   We expanded the dataset by nearly double and verified the effectiveness of 100 expanded projects through their respective communities or forums.
   We received 50 responses, out of which 30 were considered valid responses.
@@ -289,8 +221,8 @@ Finally,an appropriate machine learning model is selected as a classification.
 \subsection{Motivation}
 The section provides a validity analysis of porting-related factors on RAX.
 First,we use code complexity metrics to evaluate porting work.
-The software metrics of code Cyclomatic Complexity(CC) can help developers make macro judgments on software complexity and maintenance difficulty, evaluate potential and hidden porting difficulties, and help the tool improve accuracy.
-At present, CC indicators are mostly used in project code quality assessment, defect inspection, code reconstruction, etc.
+The software metrics of code Cyclomatic Complexity(CC) can help developers make macro judgments on software complexity and maintenance difficulty, evaluate potential and hidden porting difficulties, and help the tool improve accuracy \cite{2005Exploring}.
+At present, CC indicators are mostly used in project code quality assessment, defect inspection, code reconstruction, etc \cite{1991Cyclomatic}.
 During the porting process, developers will target a large number of project source codes, scripts, assembly codes,and a macro understanding of the project is required in the early stage of porting.
 This part of the work has a lot of overlap with the scope of code complexity.
 
@@ -298,7 +230,7 @@ This part of the work has a lot of overlap with the scope of code complexity.
 RAX tool uses the lizard CC detection tool and optimize its functions,we will introduce it in section 2.3.
 This study analyzes the relationship between CC and software porting complexity using the Spearman Rank correlation coefficient analysis method.
 We invited five Master's students who are engaged in research on porting auxiliary tools to score the porting complexity(score) of 131 software adapted for RISC-V,collected from the OpenEule list and GitHub.
-According to the collection of Internet events, log analysis, source code dismantling, and similar project analogy,we form a scoring interval in the range of $[0~5]$.
+According to the collection of Internet events, log analysis, source code dismantling, and similar project analogy \cite{liangguanyu2020}, we form a scoring interval in the range of $[0~5]$.
 We then calculated the Spearman correlation coefficient and conducted significance analysis between score and the CC factors.
 The Spearman coefficient is 0.608, with a P-value of 1.39e-14, which is less than 0.01.
 This indicates a significant correlation between the two variables.
@@ -376,12 +308,12 @@ In the end, RAX collected a total of 134 projects.
 The RAX combines the CC calculation module and the Arch\_code location module to obtain the porting vector,and the complexity vector and score together form the data set.
 
 \subsection{Lizard CC calculation module}
-Lizard's default computing method is basically consistent with McCabe's theory.
-However, Lizard tool only detects defects at the function level and uses the average function CC for file-level statistics, which is not suitable for current porting complexity detection requirements.
+Lizard's default computing method is basically consistent with McCabe's theory \cite{1702388}.
+However, Lizard tool only detects defects at the function level and uses the average function CC for file-level statistics, which is not suitable for current porting complexity detection requirements \cite{9402593}.
 This paper proposes a new method for evaluating CC specifically for porting assessment work:
 \begin{enumerate}
   \item First, calculate the function-level CC for all files in the project using McCabe's method.
-  \item Following Liu Huihui's mention of System Cyclomatic Complexity (SCC) in software evolution assessment techniques based on code change detection, we define SCC as the total sum of function-level values in the system.
+  \item Following Liu Huihui's mention of System Cyclomatic Complexity (SCC) in software evolution assessment techniques based on code change detection \cite{liuhuihui00}, we define SCC as the total sum of function-level values in the system.
   The advantage is that it can avoid the use of overly complex methods, which will cause deviations to affect the classification results.
   Additionally, it eliminates the problem of decreased detection performance caused by program transformation into syntax abstract trees and control flow graphs.
 \end{enumerate}
@@ -417,10 +349,9 @@ we form the Arch\_code dictionary:
 
 \section{Result and analysis}
 
-To answer research question 2, based on the work of Chen Xiang et al. [24], aiming at the status quo of unbalanced datasets and small sample datasets, we try to use ensemble learning methods, SMOTE [25],and random oversampling methods for data preprocessing.
+To answer research question 2, based on the work of Chen Xiang et al. \cite{5128907}, aiming at the status quo of unbalanced datasets and small sample datasets, we try to use ensemble learning methods \cite{6509481}, SMOTE \cite{4271036}, and random oversampling methods for data preprocessing.
 Ultimately, we chose to train four models: Random Forest, Support Vector Machine, Adaboost, and Xgboost.
-The experimental evaluation involved a cross-comparison of the aforementioned models based on metrics such as accuracy, macro-precision (Pmacro), macro-recall (Rmacro), and macro F1 score (F1macro).
-Through the multi-model comparison, we select the Random Forest machine learning as the classifier.
+By comparing multiple indicators, we select the Random Forest machine learning as the classifier.
 
 \begin{table}
   \caption{The Spearman correlation coefficient of score and architecture-related factors}
@@ -471,12 +402,12 @@ Sometimes developers design their work has generic code for unknown architecture
 
 \section{Related Work}
 The development of the RISC-V ecosystem is rapidly progressing.
-In the realm of scientific computing, Tine Blaise et al. [9] accomplished the porting of the OpenCL framework to RISC-V through a compiler framework, thereby expanding RISC-V's accessibility to a wider range of scientific computing applications.
-In the context of architectural migration of foundational software and libraries, Cheng Yuanhu et al. [3] designed an embedded multi-instruction set processor,addressing the software ecosystem challenges present in the RISC-V embedded domain.
+In the realm of scientific computing, Tine Blaise et al. \cite{osti_1830102} accomplished the porting of the OpenCL framework to RISC-V through a compiler framework, thereby expanding RISC-V's accessibility to a wider range of scientific computing applications.
+In the context of architectural migration of foundational software and libraries, Cheng Yuanhu et al. \cite{2017Slow} designed an embedded multi-instruction set processor,addressing the software ecosystem challenges present in the RISC-V embedded domain.
 As a result, auxiliary efforts in porting are highlighted as valuable endeavors.
-This tool approaches code complexity from the perspective of its evaluation role in software evolution and maintenance,considering its influence on porting complexity assessment.
-Alvares et al. [11] proposed using the development team's ``tolerance'' for code complexity to infer team development capabilities and performance indicators for projects.
-Vard et al. [12] emphasized that the internal quality of software impacts developers' capabilities and maintenance durations.
+This tool approaches code complexity from the perspective of its evaluation role in software evolution and maintenance,considering its influence on porting complexity assessment \cite{1993Software}.
+Alvares et al. \cite{7844689} proposed using the development team's ``tolerance'' for code complexity to infer team development capabilities and performance indicators for projects.
+Vard et al. \cite{2017Evaluating} emphasized that the internal quality of software impacts developers' capabilities and maintenance durations.
 They conducted a comprehensive study on various existing code complexity metrics' validity and suggested incorporating empirically observed code features as complexity triggers.
 
 \section{Conclusion}
@@ -500,8 +431,8 @@ To Robert, for the bagels and explaining CMYK and color spaces.
 %%
 %% The next two lines define the bibliography style to be used, and
 %% the bibliography file.
-% \bibliographystyle{ACM-Reference-Format}
-% \bibliography{sample-base}
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{paper}
 
 
 \end{document}
