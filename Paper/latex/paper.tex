@@ -14,6 +14,10 @@
 \documentclass[sigconf,screen,review]{acmart}
 
 \usepackage{multirow}
+\usepackage{svg}
+\usepackage{xcolor}
+
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO:#1]}}}
 
 %%
 %% \BibTeX command to typeset BibTeX logo in the docs
@@ -227,7 +231,8 @@ During the porting process, developers will target a large number of project sou
 This part of the work has a lot of overlap with the scope of code complexity.
 
 \subsubsection{Factor 1: Cyclomatic Complex(CC)}
-RAX tool uses the lizard CC detection tool and optimize its functions,we will introduce it in section 2.3.
+\label{sec:factor-1}
+RAX tool uses the lizard CC detection tool and optimize its functions,we will introduce it in Section \ref{sec:method}.
 This study analyzes the relationship between CC and software porting complexity using the Spearman Rank correlation coefficient analysis method.
 We invited five Master's students who are engaged in research on porting auxiliary tools to score the porting complexity(score) of 131 software adapted for RISC-V,collected from the OpenEule list and GitHub.
 According to the collection of Internet events, log analysis, source code dismantling, and similar project analogy \cite{liangguanyu2020}, we form a scoring interval in the range of $[0~5]$.
@@ -298,13 +303,13 @@ Additionally, we propose a CC assessment method to jointly establish a data set 
 Using the processing method of unbalanced datasets, multiple machine learning models are compared to select the final classifier.
 
 \subsection{Dateset}
-We used the project upstream warehouse to build the data set,that projects are from the OpenEuler:Stage2 list and GitHub, and invited 5 postgraduate students who are engaged in the research of RISC-V porting auxiliary tools to participate in the experimental evaluation.
-Specific evaluation methods include: collecting event information of architecture porting through the Internet;log analysis;manually dismantling architecture-related codes;analogy with similar projects.
+We used the project upstream warehouse to build the data set,that projects mainly targeting C and C++ are from the OpenEuler:Stage2 list and GitHub,and invited 5 postgraduate students who are engaged in the research of RISC-V porting auxiliary tools to participate in the experimental evaluation.
+Specific evaluation methods can be found in Section \ref{sec:factor-1}.
 The evaluation scores are divided into three categories: low, medium, and high.
-Higher score requires more development time, more experienced porting developers, and more precise strategy.
 In the end, RAX collected a total of 134 projects.
 
 \subsection{Method}
+\label{sec:method}
 The RAX combines the CC calculation module and the Arch\_code location module to obtain the porting vector,and the complexity vector and score together form the data set.
 
 \subsection{Lizard CC calculation module}
@@ -334,7 +339,7 @@ we form the Arch\_code dictionary:
   This is why we cannot achieve Fine-grained evaluation,we simply count the number of lines.
   \item Intrinsic functions are interfaces provided by compilers that are closely related to the architecture.
   Calling Intrinsic functions can replace assembly code.
-  We compile dictionaries of Intrinsic functions based on official documentation from X86[2].
+  We compile dictionaries of Intrinsic functions based on official documentation from X86\todo{[2]}.
   Builtin function also employ a similar approach;In the future,we may assign difficulty weights to them.
   Currently,we only perform frequency statistics on them.
   Additionally,we will continue to supplement the analysis of whether the functions already have corresponding implementation for RISC-V and whether they are truly needed in RISC-V.
@@ -360,7 +365,7 @@ By comparing multiple indicators, we select the Random Forest machine learning a
     \toprule
      & Accuracy & Pmacro & Rmacro & F1macro \\
     \midrule
-    Tool 1[26] & 0.838 & 0.802 & 0.880 & 0.823 \\
+    Tool 1\todo{[26]} & 0.838 & 0.802 & 0.880 & 0.823 \\
     RAX & 0.857 & 0.817 & 0.873 & 0.836 \\
   \bottomrule
 \end{tabular}
@@ -378,11 +383,11 @@ Appendix presents a comparative assessment of the porting complexity evaluation 
      & \multicolumn{2}{c}{Tool 1} & \multicolumn{2}{c}{RAX} \\
      & TP & FN & TP & FN \\
     \midrule
-    Low & 13 & 3 & 15 & 1 \\
+    Low & 15 & 3 & 17 & 1 \\
     Medium & 5 & 2 & 5 & 2 \\
     High & 3 & 4 & 7 & 0 \\
-    Sum & 21 & 9 & 27 & 3 \\
-    project & \multicolumn{2}{c}{30} & \multicolumn{2}{c}{30} \\
+    Sum & 23 & 9 & 29 & 3 \\
+    project & \multicolumn{2}{c}{32} & \multicolumn{2}{c}{32} \\
   \bottomrule
 \end{tabular}
 \end{table}
