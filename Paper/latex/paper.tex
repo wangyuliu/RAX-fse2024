@@ -129,18 +129,18 @@ We establish a high-quality data set of software porting complexity, and select 
 %% Please copy and paste the code instead of the example below.
 %%
 \begin{CCSXML}
-  <ccs2012>
-     <concept>
-         <concept_id>10011007.10011006.10011072</concept_id>
-         <concept_desc>Software and its engineering~Software libraries and repositories</concept_desc>
-         <concept_significance>500</concept_significance>
-         </concept>
-     <concept>
-         <concept_id>10011007.10011074.10011111</concept_id>
-         <concept_desc>Software and its engineering~Software post-development issues</concept_desc>
-         <concept_significance>300</concept_significance>
-         </concept>
-   </ccs2012>
+<ccs2012>
+    <concept>
+        <concept_id>10011007.10011006.10011072</concept_id>
+        <concept_desc>Software and its engineering~Software libraries and repositories</concept_desc>
+        <concept_significance>500</concept_significance>
+        </concept>
+    <concept>
+        <concept_id>10011007.10011074.10011111</concept_id>
+        <concept_desc>Software and its engineering~Software post-development issues</concept_desc>
+        <concept_significance>300</concept_significance>
+    </concept>
+</ccs2012>
 \end{CCSXML}
   
 \ccsdesc[500]{Software and its engineering~Software libraries and repositories}
@@ -252,24 +252,27 @@ Continue to collect other factors that may affect the evaluation of porting comp
 The number of architecture-related code lines and files is located using the keywords of X86, ARM, MIPS, RISCV, SPARC and other architectures.
 Correlation comparison between Arch\_code and other factors acquired by Commit analyzer,as shown in Table \ref{tab:score}:
 
-\begin{table*}
+\begin{table}
   \caption{The Spearman correlation coefficient of score and architecture-related factors}
   \label{tab:score}
-  \begin{tabular}{cccccc}
+  \begin{tabular}{cc}
     \toprule
-    conditional compilation & Builtin & Intrinstic & syscall & asm & build\_scripts \\
+    Type & Score \\
     \midrule
-    0.73 & 0.61 & 0.74 & 0.69 & 0.66 & 0.43 \\
-  \bottomrule
-\end{tabular}
-\begin{tabular}{ccccc}
-  \toprule
-  time & authors & lines of arch & files of arch & keyword count \\
-  \midrule
-  -0.16 & 0.43 & 0.16-0.40 & 0.34-0.41 & 0.17-0.43 \\
-\bottomrule
-\end{tabular}
-\end{table*}
+    conditional compilation & 0.73 \\
+    Builtin & 0.61 \\
+    Intrinstic & 0.74 \\
+    syscall & 0.69 \\
+    asm & 0.66 \\
+    build\_scripts & 0.43 \\
+    time & -0.16 \\
+    authors & 0.43 \\
+    lines of arch & 0.16-0.40 \\
+    files of arch & 0.34-0.41 \\
+    keyword count & 0.17-0.43 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 The results indicate that Arch\_code has a higher correlation with score compared to other factors, and it also aligns with the significant results of the Spearman correlation test.
 The use of only architecture keywords for statistics yields moderate effectiveness in evaluating tool because keywords can only be detected from comments and macro sections of Commit, while critical porting code may lack these keywords,but the keyword count can reflect the amount of porting modification from the side.
@@ -326,7 +329,7 @@ we form the Arch\_code dictionary:
   This is why we cannot achieve Fine-grained evaluation,we simply count the number of lines.
   \item Intrinsic functions are interfaces provided by compilers that are closely related to the architecture.
   Calling Intrinsic functions can replace assembly code.
-  We compile dictionaries of Intrinsic functions based on official documentation from X86\todo{[2]}.
+  We compile dictionaries of Intrinsic functions based on official documentation from x86.
   Builtin function also employ a similar approach;In the future,we may assign difficulty weights to them.
   Currently,we only perform frequency statistics on them.
   Additionally,we will continue to supplement the analysis of whether the functions already have corresponding implementation for RISC-V and whether they are truly needed in RISC-V.
@@ -352,7 +355,7 @@ By comparing multiple indicators, we select the Random Forest machine learning a
     \toprule
      & Accuracy & Pmacro & Rmacro & F1macro \\
     \midrule
-    Tool 1\todo{[26]} & 0.838 & 0.802 & 0.880 & 0.823 \\
+    Tool 1 & 0.838 & 0.802 & 0.880 & 0.823 \\
     RAX & 0.857 & 0.817 & 0.873 & 0.836 \\
   \bottomrule
 \end{tabular}
@@ -417,8 +420,7 @@ Our next steps involve attempting text classification methods to categorize the 
 %% identification of the section in the article metadata, and the
 %% consistent spelling of the heading.
 \begin{acks}
-  This work was supported by Youth Innovation Promotion Association, Chinese Academy
-  of Sciences (Grant No. 2023118).
+  This work was supported by the Strategic Priority Research Program of the Chinese Academy of Sciences (Grant No. XDA0320102) and Youth Innovation Promotion Association, Chinese Academy of Sciences (Grant No. 2023118).
 \end{acks}
 
 %%
