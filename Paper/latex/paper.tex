@@ -17,6 +17,7 @@
 \usepackage{svg}
 \usepackage{xcolor}
 
+
 \newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO:#1]}}}
 
 %%
@@ -176,10 +177,10 @@ We establish a high-quality data set of software porting complexity, and select 
 \maketitle
 
 \section{Introduction}
-RISC-V is an emerging open-source and reduced ISA which avoids potential risks such as intellectual property issues\cite{2014The}.RISC-V provides an alternative to traditional commercial instruction set architectures. OpenCloudOS Kernel Stream 2207.2 kernel version adds support for the RISC-V 64 architecture\cite{osti_1560133}; openEuler has joined RISC-V International, and RISC-V has officially become openEuler's official support architecture.The RISC-V SIG took the lead in completing the mainline integration of openEuler RISC-V 23.09\cite{osti_1560132}.
+RISC-V is an emerging open-source and reduced ISA \textcolor{red}{with the development of XXX.} \textcolor{blue}{which avoids potential risks such as intellectual property issues\cite{2014The}.RISC-V provides an alternative to traditional commercial instruction set architectures.} \textcolor{red}{[Add support for RV architecture from various operating system. For example, given a duration, provide the number of porting.]} OpenCloudOS Kernel Stream 2207.2 kernel version adds support for the RISC-V 64 architecture\cite{osti_1560133}; \textcolor{red}{OpenEuler}\textcolor{blue}{openEuler} has joined RISC-V International \textcolor{red}{organization}, and RISC-V has officially become openEuler's official support architecture.\textcolor{red}{ The RISC-V SIG took the lead in completing the mainline integration of openEuler RISC-V 23.09\cite{osti_1560132}}.\textcolor{blue}{The mainline integraton of OpenEuler RISC-V 23.09\cite{osti_1560132} was finished by the RISC-V SIG.}
 
 Although RISC-V has already made initial progress in having a relatively complete tool chain, it still requires the support of a large number of application software \cite{2019Notary}.
-However, establishing a mature software ecosystem still face challenges.
+\textcolor{red}{Hence} \textcolor{blue}{However}, establishing a mature software ecosystem still face challenges. \textcolor{red}{To adapt to the RISC-V, efficient porting of RPM packages is greatly depending on domain expertise of programmers and is still time-consuming.}
 Currently, there is a lack of standardized metrics to measure software architecture portability,and porting planning relies on domain expertise.The difficulty in estimating porting work leads to challenges in accurately allocating resources;In the context of varying levels of developers' skills in porting, there is an even greater need to efficiently assess the difficulty of software package porting and provide guidance to developers of all kinds.In order to solve these problems,one of the methods is to make analogies with adapted projects to gain porting experience,but it is difficult to extract factors by manual sorting;Even if developers have sensitivity to architecture-related modules, it is still challenging to accurately obtain the workload. 
 Du Jiman et al. have developed a basic statistical evaluation plan for CPU architecture code in project \cite{2023du}, however, their work lacks a thorough validity analysis and comparison of factors,and fails to consider the complexity associated with the software operation and maintenance process.
 
