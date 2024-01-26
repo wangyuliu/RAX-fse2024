@@ -178,19 +178,21 @@ We establish a high-quality data set of software porting complexity, and select 
 
 \section{Introduction}
 RISC-V is an emerging open-source and reduced ISA \textcolor{red}{with the development of XXX.} \textcolor{blue}{which avoids potential risks such as intellectual property issues\cite{2014The}.RISC-V provides an alternative to traditional commercial instruction set architectures.} \textcolor{red}{[Add support for RV architecture from various operating system. For example, given a duration, provide the number of porting.]} OpenCloudOS Kernel Stream 2207.2 kernel version adds support for the RISC-V 64 architecture\cite{osti_1560133}; \textcolor{red}{OpenEuler}\textcolor{blue}{openEuler} has joined RISC-V International \textcolor{red}{organization}, and RISC-V has officially become openEuler's official support architecture.\textcolor{blue}{ The RISC-V SIG took the lead in completing the mainline integration of openEuler RISC-V 23.09\cite{osti_1560132}}.\textcolor{red}{The mainline integraton of OpenEuler RISC-V 23.09\cite{osti_1560132} was finished by the RISC-V SIG.}
+\textcolor{orange}{In recent years, the RISC-V Instruction Set Architecture (ISA) has garnered significant attention from academia, particularly the industry, due to its open-source and reduced design.\citep{2014The}.OpenEuler has joined RISC-V International organization, and RISC-V has officially become openEuler's official support architecture.The mainline integration of openEuler RISC-V 23.09 was finished by the RISC-V SIG.The main repository of openEuler 23.03 has successfully ported 4,244 software packages to the RISCV64,while the openEuler 23.09 main repository has currently completed the porting work of 5,694 software packages\citep{osti_1560132}.OpenCloudOS Kernel Stream 2207.2 kernel version adds support for the RISC-V 64 architecture\citep{osti_1560133}.}
 
 Although RISC-V has already made initial progress in having a relatively complete tool chain, it still requires the support of a large number of application software \cite{2019Notary}.
 \textcolor{red}{Hence} \textcolor{blue}{However}, establishing a mature software ecosystem still face challenges. \textcolor{red}{To adapt to the RISC-V, efficient porting of RPM packages is greatly depending on domain expertise of programmers and is still time-consuming.}
 Currently, there is a lack of standardized metrics to measure software architecture portability,and porting planning relies on domain expertise.The difficulty in estimating porting work leads to challenges in accurately allocating resources;In the context of varying levels of developers' skills in porting, there is an even greater need to efficiently assess the difficulty of software package porting and provide guidance to developers of all kinds.In order to solve these problems,one of the methods is to make analogies with adapted projects to gain porting experience,but it is difficult to extract factors by manual sorting;Even if developers have sensitivity to architecture-related modules, it is still challenging to accurately obtain the workload. 
+\textcolor{orange}{Despite the rapid development of the RISC-V ISA, which foundational software such as operating systems and compilers are relatively mature, there is still a significant demand for porting a large number of application software.\citep{2019Notary}. However, establishing a mature software ecosystem still face challenges.To adapt to the RISC-V,efficiently porting software package is greatly depending on domain expertise and is characterized by significant costs and resources. During the initial planning phase of porting, the lack of standardized evaluation criteria for software portability can lead to misallocation of resources in the development process. Even for developers who are well-versed in architecture code, accurately estimating the extent of modifications required in the project can be challenging. Therefore, it is desirable to propose a method that automates the assessment of porting complexity, converting expert knowledge into evaluation standards. This will enable different development teams to access software packages that are tailored to their proficiency levels, thus assisting distribution vendors in the porting of RISC-V architecture.}
 Du Jiman et al. have developed a basic statistical evaluation plan for CPU architecture code in project \cite{2023du}, however, their work lacks a thorough validity analysis and comparison of factors,and fails to consider the complexity associated with the software operation and maintenance process.
-
-RAX can provide developers with accurate evaluation, recommend software with different levels of porting difficulty based on their skill levels.
+\textcolor{orange}{Du et al. have developed a basic statistical evaluation plan for CPU architecture code in project\citep{2023du},however,their work lacks a thorough validity analysis of factors,and fails to consider the complexity associated with the software operation and maintenance process.}
+RRAX can provide developers with accurate evaluation, recommend software with different levels of porting difficulty based on their skill levels. The contributions of this paper are as follows:
 The contributions of this paper are as follows:
 \begin{enumerate}
   \item Firstly, we conducted analysis on selection of factors related the porting evaluation,investigated the significance of code complexity metrics in the context of porting work and incorporated Cyclomatic Complexity as a factor to assess the overall complexity of  the project.
   \item Based on porting-related factors, we designed a scanning tool to collect porting complexity vectors and ultimately selected random forest machine learning model as the classifier for RAX.
   \item Evaluate the effectiveness of RAX.
-  We nearly doubled the dataset compared to Du Jiman's tool,and verified the effectiveness of the evaluation of 100 extension projects in real porting scenarios through their respective communities or forums. We received 50 valid responses.Our findings indicate that RAX outperforms the Du Jiman's tool, delivering substantial improvements in terms of performance and accuracy..
+ We nearly doubled the dataset compared to Du Jiman's tool,and verified the effectiveness of the evaluation of extension projects in real porting scenarios through their respective communities or forums. We received 50 valid responses.Our findings indicate that RAX outperforms the Du Jiman's tool, delivering substantial improvements in terms of performance and accuracy.
 \end{enumerate}
 
 
@@ -275,7 +277,7 @@ The number of architecture-related code lines and files is located using the key
 Correlation comparison between Arch\_code and other factors acquired by Commit analyzer,as shown in Figure \ref{fig:correlation}:
 \begin{figure}
   \centering
-  \includegraphics[width=\linewidth]{correlation.pdf}
+  \includegraphics[width=\linewidth]{figure3.pdf}
   \caption{The Correlation}
   \label{fig:correlation}
   \Description{The Correlation}
@@ -291,14 +293,10 @@ However, using a single factor alone does not result in a significantly strong c
 
 To design RAX that assists developers with porting work,the following research questions are proposed:
 
-\textbf{Research Question 1:} Developers often struggle to make fine-grained differentiations in the complexity of porting projects.
-How can we select architecture-relevant factors to design an automated tool that assesses the porting difficulty?
-We analyzes the porting modifications obtained from developer Commit in the Git tool.
-We conducts an effectiveness analysis of the selected factors and filters out strongly correlated ones that can be automatically identified using the Lines of Code (LOC) approach.
-Additionally, we propose a CC assessment method to jointly establish a data set for porting complexity.
+\textbf{RQ 1:} How can we select architecture-relevant actors that is fine-grained to design an automated tool that assesses the porting difficulty?
 
-\textbf{Research question 2:} How to select a classifier to obtain effective classification results for the tool?
-Using the processing method of unbalanced datasets, multiple machine learning models are compared to select the final classifier.
+\textbf{RQ 2:} How to select a classifier to obtain effective classification results for the tool?
+
 
 \subsection{Dataset}
 We used the project upstream warehouse to build the data set,that projects mainly targeting C and C++ are from the OpenEuler\citep{stage2023} list and GitHub,and invited 5 postgraduate students who are engaged in the research of RISC-V porting auxiliary tools to participate in the experimental evaluation.Specific evaluation methods can be found in 2.1.1. The evaluation scores are divided into three categories: low, medium, and high\citep{githuburl}.This includes 139 projects as training, testing, and validation datasets, while more than 80 additional projects were used as a tool evaluation dataset. To gather insights from developers, the community, forums, and emails were utilized, resulting in over 50 meaningful feedback responses. In order to address the issue of data imbalance caused by collecting datasets solely from the openEuler mailing list, where more than 80\% of the projects were initially evaluated as having low porting complexity, a greater emphasis was placed on projects that had higher numbers of likes on GitHub and were deemed more important and active. Additionally, efforts were made to collect projects from the bottom such as operating systems, kernel-level projects,mathematical computation libraries,and machine learning libraries.
