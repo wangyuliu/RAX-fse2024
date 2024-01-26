@@ -181,7 +181,7 @@ D:\python-setup\python.exe ".\RAX-2024-main\RAX\SourceScanner\lizard.py" D:\port
 The location of the RAX dataset is/ RAX/ModelTrainAndPredict/data/dataset/train-test-merged-new.csv, where train-test-merged.csv is the dataset from the old version of the tool. You can also obtain the new dataset in RAX from the GitHub repository and perform the required training. The training was completed in ModelTrainAndPredict. py under the directory, and RAX ultimately chose a random forest machine learning model to complete the classification work.
 
 ```bash
-        随机森林：
+        Random Forest：
         n_estimators：The number of trees. Increasing the number of trees can improve the accuracy of the model, but it will increase computation time and memory consumption.
         max_depth：The maximum depth of the tree. Increasing the maximum depth of the tree can improve the accuracy of the model, but it will increase the risk of overfitting.
         min_samples_split：The minimum number of split samples. Increasing the minimum split sample size can reduce the risk of overfitting, but it may decrease the accuracy of the model.
