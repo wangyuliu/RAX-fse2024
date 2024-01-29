@@ -412,7 +412,11 @@ In the end,our tool selection was CC and the Arch\_code build scanning tool,as s
 
 \section{RAX}
 Since we identify architecture-relevant important
+<<<<<<< Updated upstream
 factors affecting porting efficiency, we implement a fine-grained and automated tool to evaluate complexity. Figure \ref{fig:figure1} shows the entire technology roadmap in three parts such as Analysis, Data Collection and {Evaluation. RAX can be deployed easily by installing dependencies, highlighting its convenience and user-friendliness.
+=======
+factors affecting porting efficiency, we implement a fine-grained and automated tool to evaluate complexity. Figure \ref{fig:figure1} shows the entire technology roadmap in three parts such as Analysis, Data Collection and Evaluation. RAX can be deployed easily for programmers by installing dependencies, highlighting its convenience and user-friendliness.
+>>>>>>> Stashed changes
 % \textcolor{blue}{The following is an introduction to the process of RAX construction, as shown in Figure \ref{fig:figure1}.
 % During the analysis phase,architecture\-related factors are obtained through the Commit tool for selection while investigating the impact of code complexity metrics on porting.
 % A scanning tool is built to get potential modification workload. Finally,an appropriate machine learning model is selected as a classification.}
@@ -439,7 +443,11 @@ By analyzing the correlation coefficient (Pearson's) between the keyword coverag
 Based on these results, analyze that our tool try to effectively assess the porting difficulty between two architectures. It is not as simple as adding up the modification amounts for different architectures, as it may only reflect an increase in code volume. Moreover, due to the large differences in row-based statistical results caused by the differences in code structure reflected by each architecture, this approach that easily considers all architectures simultaneously without considering the code structure and architectural weight lead to ambiguous outcomes.Therefore, based on these experiments, we still select x86 to build Arch\_code scan function, given its mainstream position.
 \subsubsection{Dataset Collection}
 % We used the project upstream warehouse to build the data set,which mainly targeting C and C++ are from the OpenEu-ler list and GitHub,and invited 5 postgraduate students who are engaged in the research of RISC-V porting auxiliary tools to participate in the experimental evaluation.Specific evaluation methods can be found in \ref{sec:factor-1}. The evaluation scores are divided into three categories: low, medium, and high\citep{githuburl}.This includes 139 projects as training, testing, and validation datasets, while 72 additional projects were used as a tool effectiveness evaluation dataset. To gather insights from developers, the community, forums, and emails were utilized, resulting in over 51 meaningful feedback responses. 
+<<<<<<< Updated upstream
 We used the project upstream warehouse to build the data set,which mainly targeting C and C++ are from the OpenEuler list and GitHub\citep{stage2023}.We obtain the complexity vector through the designed method \ref{sec:factor}.In order to address the issue of data imbalance caused by collecting datasets solely from the openEuler mailing list, where more than 80\% of the projects were initially evaluated as having low porting complexity, a greater emphasis was placed on projects that had higher numbers of likes on GitHub and were deemed more important and active. Additionally, efforts were made to collect projects from the system bottom such as operating systems, kernel-level projects,mathematical computation libraries,and machine learning libraries.
+=======
+We used the project upstream warehouse to build the data set,which mainly targeting C and C++ are from the OpenEuler list and GitHub\citep{stage2023}.In order to address the issue of data imbalance caused by collecting datasets solely from the openEuler mailing list, where more than 80\% of the projects were initially evaluated as having low porting complexity, a greater emphasis was placed on projects that had higher numbers of likes on GitHub and were deemed more important and active. Additionally, efforts were made to collect projects from the system bottom such as operating systems, kernel-level projects,mathematical computation libraries,and machine learning libraries. \textcolor{red}{It is worth emphasizing that, all these projects' complexity evaluated by RAX hoped to be verified  by the own developer of projects.}
+>>>>>>> Stashed changes
 
 \subsubsection{Evaluation}
 % RAX obtains porting complexity vector through the CC calculation method and Arch\_code statistical value.\\
@@ -493,9 +501,15 @@ In our study, we opted to utilize Random Forest machine learning model for condu
 \subsubsection{Dataset}
  To evaluate RAX, We chose typical and popular C and C++ projects from upstream warehouse of the OpenEuler and GitHub\citep{stage2023}. First, we searched keywords "rv" or "riscv" and collected 139 projects as our training and testing dataset. Then, five postgraduate students are invited to tag the porting auxiliary for these projects. The evaluation scores are divided into three categories:low, medium, and high\citep{githubss}. Second, models are trained and tested based on the 139 projects. Third, to evaluate the RAX, additional 72 projects are collected and evaluated from GitHub. To gather response from developers, the community, forums, and emails were utilized. 
 \subsubsection{Result and Analysis}
+<<<<<<< Updated upstream
 We used ensemble learning methods \cite{6509481}, SMOTE \cite{4271036}, and random oversampling methods for data preprocessing\cite{5128907} addressing the problem of unbalanced datasets and small sample datasets.
 % Ultimately, we chose to train four models:Random Forest, Support Vector Machine, Adaboost, and Xgboost.
 By comparing multiple indicators, we select the Random Forest machine learning model as the classifier, as shown in Table \ref{tab:evaluation}.
+=======
+To answer RQ 2, based on the work of Chen Xiang et al. \cite{5128907}, aiming at the status quo of unbalanced datasets and small sample datasets, we try to use ensemble learning methods \cite{6509481}, SMOTE \cite{4271036}, and random oversampling methods for data preprocessing.
+Ultimately, we chose to train four models: Random Forest, Support Vector Machine, Adaboost, and Xgboost.
+By comparing multiple indicators, we select the Random Forest\textcolor{red}{, which had the highest accuracy of 0.857} as the classifier, as shown in Table \ref{tab:evaluation}.
+>>>>>>> Stashed changes
 
 \begin{table}
   \caption{Experimental Results of Models}
@@ -510,8 +524,7 @@ By comparing multiple indicators, we select the Random Forest machine learning m
 \end{tabular}
 \end{table}
 
-We continued to expand 72 projects as a supplementary data set, and the prediction results were determined through comments from the community and forum.
-Github presents comparison\cite{githubss} with the porting complexity evaluation tool developed by Du et al. across various projects, the comparison results are shown in Table \ref{tab:effectiveness}.Through real-world evaluations within the developer community, our tool has exhibited a significant improvement in accuracy, surpassing other comparable tools by a margin of 15.6\%. In Github, we provide a comprehensive compilation of the community's valuable feedback comments, accompanied by the relevant web links for further reference and validation.
+We provide a comprehensive compilation of the community's valuable feedback comments, accompanied by the relevant web links for further reference and validation \textcolor{red}{ shown in \cite{githubss} and Table \ref{tab:effectiveness}. Our experiments shows that, compared with other tool, RAX is more accurately to evaluate projects' complexity. In detail, the true positive (TP) of other tool is 39/51, while the RAX is 47/51.  At the same time, the RAX has a lower rate of false positive (FN) than other tools. The values are 4/51 and 12/51, respectively. } Through real-world evaluations within the developer community, our tool has exhibited a significant improvement in accuracy, surpassing other comparable tools by a margin of 15.6\%. 
 
 \begin{table}
   \caption{Tool Effectiveness Comparison from Community Feedback}

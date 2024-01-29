@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.10)  30 JAN 2024 02:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.10)  30 JAN 2024 03:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -826,45 +826,19 @@ Overfull \hbox (3.82579pt too wide) in paragraph at lines 174--174
 <figure2.pdf, id=61, 462.52798pt x 346.89601pt>
 File: figure2.pdf Graphic file (type pdf)
 <use figure2.pdf>
-Package pdftex.def Info: figure2.pdf  used on input line 228.
+Package pdftex.def Info: figure2.pdf  used on input line 229.
 (pdftex.def)             Requested size: 241.14749pt x 180.86334pt.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.0pt on input line 245.
+(Font)              scaled to size 6.0pt on input line 243.
 [1.1{d:/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-LaTeX Font Info:    Trying to load font information for U+ding on input line 291.
- (d:/texlive/2020/texmf-dist/tex/latex/bbding/Uding.fd
-File: Uding.fd 1996/02/01 v1.0 BBding font definitions
-)
-<figure3.pdf, id=95, 722.7pt x 722.7pt>
+<figure3.pdf, id=91, 722.7pt x 722.7pt>
 File: figure3.pdf Graphic file (type pdf)
 <use figure3.pdf>
-Package pdftex.def Info: figure3.pdf  used on input line 302.
+Package pdftex.def Info: figure3.pdf  used on input line 268.
 (pdftex.def)             Requested size: 241.14749pt x 241.14935pt.
-
-Overfull \hbox (4.39023pt too wide) in paragraph at lines 299--311
-[]\T1/LinuxLibertineT-TLF/m/n/9 (-20) Figure [][]2[][] shows the cor-re-la-tion com-par-i-son be-tween Arch_code,CC
- []
-
-<figure1.pdf, id=98, 845.1575pt x 597.23125pt>
-File: figure1.pdf Graphic file (type pdf)
-<use figure1.pdf>
-Package pdftex.def Info: figure1.pdf  used on input line 396.
-(pdftex.def)             Requested size: 241.14749pt x 170.40404pt.
-LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 409.
-LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 409.
-LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 414.
-[2.2 <./figure2.pdf> <./figure3.pdf
-
-pdfTeX warning: pdflatex.exe (file ./figure3.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->]
-Underfull \vbox (badness 3803) has occurred while \output is active []
-
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 436.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 279.
  (d:/texlive/2020/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
@@ -872,10 +846,33 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `pcr' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [3.3 <./figure1.pdf>] Excluding 'acks' comment.
-Underfull \vbox (badness 3713) has occurred while \output is active []
+LaTeX Font Info:    Trying to load font information for U+ding on input line 325.
+ (d:/texlive/2020/texmf-dist/tex/latex/bbding/Uding.fd
+File: Uding.fd 1996/02/01 v1.0 BBding font definitions
+)
+Overfull \hbox (4.39023pt too wide) in paragraph at lines 333--337
+[]\T1/LinuxLibertineT-TLF/m/n/9 (-20) Figure [][]2[][] shows the cor-re-la-tion com-par-i-son be-tween Arch_code,CC
+ []
 
- [4.4] (./paper.bbl
+LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
+(Font)              scaled to size 9.0pt on input line 337.
+LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
+(Font)              scaled to size 7.0pt on input line 337.
+[2.2 <./figure2.pdf> <./figure3.pdf
+
+pdfTeX warning: pdflatex.exe (file ./figure3.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+<figure1.pdf, id=189, 845.1575pt x 597.23125pt>
+File: figure1.pdf Graphic file (type pdf)
+<use figure1.pdf>
+Package pdftex.def Info: figure1.pdf  used on input line 426.
+(pdftex.def)             Requested size: 241.14749pt x 170.40404pt.
+LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/it' will be
+(Font)              scaled to size 9.0pt on input line 439.
+
+Underfull \vbox (badness 4403) has occurred while \output is active []
+
+ [3.3 <./figure1.pdf>] [4.4] Excluding 'acks' comment. (./paper.bbl
 LaTeX Info: Redefining \tempurl on input line 60.
 LaTeX Info: Redefining \tempurl on input line 72.
 LaTeX Info: Redefining \tempurl on input line 84.
@@ -888,9 +885,6 @@ LaTeX Info: Redefining \tempurl on input line 205.
 LaTeX Info: Redefining \tempurl on input line 228.
 LaTeX Info: Redefining \tempurl on input line 263.
 LaTeX Info: Redefining \tempurl on input line 277.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 LaTeX Info: Redefining \tempurl on input line 308.
 LaTeX Info: Redefining \tempurl on input line 325.
 LaTeX Info: Redefining \tempurl on input line 339.
@@ -904,27 +898,31 @@ Package balance Warning: You have called \balance in second column
 (balance)                Columns might not be balanced.
 
 [5.5]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 546.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 546.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 585.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 585.
  (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 546.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 546.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 585.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 585.
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: AEC28D84C3FF82F87B835C0A2B416872;1402.
- ) 
+ )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 416 ({)
+### bottom level 
 Here is how much of TeX's memory you used:
- 19696 strings out of 482503
- 298791 string characters out of 5950823
- 619776 words of memory out of 5000000
- 34429 multiletter control sequences out of 15000+600000
- 658212 words of font info for 275 fonts, out of 8000000 for 9000
+ 19697 strings out of 482503
+ 298794 string characters out of 5950823
+ 620809 words of memory out of 5000000
+ 34430 multiletter control sequences out of 15000+600000
+ 658016 words of font info for 275 fonts, out of 8000000 for 9000
  197 hyphenation exceptions out of 8191
- 63i,16n,100p,1339b,546s stack positions out of 5000i,500n,10000p,200000b,80000s
-{d:/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_oexx6f.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_naooyc.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}<d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/LibertineMathMI.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/LibertineMathMI7.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinumT.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinumTB.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinumTI.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinLibertineT.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinLibertineTB.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinLibertineTI.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/niceframe-type1/bbding10.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/txexs.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/txsys.pfb><d:/texlive/2020/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on paper.pdf (5 pages, 572789 bytes).
+ 63i,16n,100p,1339b,582s stack positions out of 5000i,500n,10000p,200000b,80000s
+{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_oexx6f.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_naooyc.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}<d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/LibertineMathMI.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/LibertineMathMI7.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinumT.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinumTB.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinumTI.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinLibertineT.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinLibertineTB.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinLibertineTI.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/niceframe-type1/bbding10.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/txexs.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/txsys.pfb><d:/texlive/2020/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+Output written on paper.pdf (5 pages, 573499 bytes).
 PDF statistics:
- 351 PDF objects out of 1000 (max. 8388607)
- 247 compressed objects within 3 object streams
+ 357 PDF objects out of 1000 (max. 8388607)
+ 253 compressed objects within 3 object streams
  60 named destinations out of 1000 (max. 500000)
  38516 words of extra memory for PDF output out of 42996 (max. 10000000)
 
