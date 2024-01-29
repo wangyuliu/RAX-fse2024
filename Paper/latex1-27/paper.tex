@@ -385,11 +385,11 @@ In the end,our tool selection was CC and the Arch\_code build scanning tool,as s
 % \end{table}
 
 \section{RAX}
-\textcolor{red}{Since we identify architecture-relevant important
-factors affecting porting efficiency, we implement a fine-grained and automated tool to evaluate complexity. Figure \ref{fig:figure1} shows the entire technology roadmap in three parts such as Analysis, Data Collection and Evaluation. RAX can be deployed }
-\textcolor{blue}{The following is an introduction to the process of RAX construction, as shown in Figure \ref{fig:figure1}.
-During the analysis phase,architecture\-related factors are obtained through the Commit tool for selection while investigating the impact of code complexity metrics on porting.
-A scanning tool is built to get potential modification workload. Finally,an appropriate machine learning model is selected as a classification.}
+Since we identify architecture-relevant important
+factors affecting porting efficiency, we implement a fine-grained and automated tool to evaluate complexity. Figure \ref{fig:figure1} shows the entire technology roadmap in three parts such as Analysis, Data Collection and Evaluation. RAX can be deployed easily by installing dependencies, highlighting its convenience and user-friendliness.
+% \textcolor{blue}{The following is an introduction to the process of RAX construction, as shown in Figure \ref{fig:figure1}.
+% During the analysis phase,architecture\-related factors are obtained through the Commit tool for selection while investigating the impact of code complexity metrics on porting.
+% A scanning tool is built to get potential modification workload. Finally,an appropriate machine learning model is selected as a classification.}
 
 \begin{figure}
   \centering
@@ -404,16 +404,20 @@ A scanning tool is built to get potential modification workload. Finally,an appr
 
 \subsection{Implementation}
 \label{sec:Implementation}
-RAX obtains porting complexity vector through the CC calculation method and Arch\_code statistical value.
+% RAX obtains porting complexity vector through the CC calculation method and Arch\_code statistical value.
+\subsubsection{Analysis}
+We intend to use the Lizard tool, which employs a methodology consistent with the McCabe's method\cite{1702388}, to obtain CC metrics.
+However, Lizard tool only defects at the function level and uses the average function CC for file-level statistics, which is not suitable for current porting complexity detection requirements \cite{9402593}.We need to redefine the CC method to avoid the use of complex methods, which will cause deviations to affect the classification results.Additionally, we must address the potential performance overhead problem caused by converting the entire project into abstract syntax tree.\\
+Other tools only consider x86 architecture to locate architecture-related code for statistical analysis. We propose a new idea that explore whether multiple architectures can be selected or if other architectures can be individually targeted. Based on this, we conducted comparative experiments using various architectures, including X86, ARM, MIPS, RISCV, SPARC, and PowerPC. We performed scanning and counting based on the keyword and function dictionaries specific to each architecture, which were derived from common patterns summarized by official websites.
+By analyzing the correlation coefficient (Pearson's) between the keyword coverage line statistics of the six architectures and the score representing the porting complexity, we found that the correlation ranged from 0.44 to 0.58, indicating all correlation results are not significant. Additionally, the correlation between the total values for all architectures and score was only 0.49.
+Based on these results, analyze that our tool try to effectively assess the porting difficulty between two architectures. It is not as simple as adding up the modification amounts for different architectures, as it may only reflect an increase in code volume. Moreover, due to the large differences in row-based statistical results caused by the differences in code structure reflected by each architecture, this approach that easily considers all architectures simultaneously without considering the code structure and architectural weight lead to ambiguous outcomes.Therefore, based on these experiments, we still select x86 to build Arch\_code scan function, given its mainstream position.
+\subsubsection{Dataset Collection}
+We used the project upstream warehouse to build the data set,which mainly targeting C and C++ are from the OpenEu-ler list and GitHub,and invited 5 postgraduate students who are engaged in the research of RISC-V porting auxiliary tools to participate in the experimental evaluation.Specific evaluation methods can be found in \ref{sec:factor-1}. The evaluation scores are divided into three categories: low, medium, and high\citep{githuburl}.This includes 139 projects as training, testing, and validation datasets, while 72 additional projects were used as a tool effectiveness evaluation dataset. To gather insights from developers, the community, forums, and emails were utilized, resulting in over 51 meaningful feedback responses. In order to address the issue of data imbalance caused by collecting datasets solely from the openEuler mailing list, where more than 80\% of the projects were initially evaluated as having low porting complexity, a greater emphasis was placed on projects that had higher numbers of likes on GitHub and were deemed more important and active. Additionally, efforts were made to collect projects from the system bottom such as operating systems, kernel-level projects,mathematical computation libraries,and machine learning libraries.
 
-\subsubsection{Lizard CC calculation scan function}
-Lizard's default computing method is basically consistent with McCabe's theory \cite{1702388}.
-However, Lizard tool only defects at the function level and uses the average function CC for file-level statistics, which is not suitable for current porting complexity detection requirements \cite{9402593}.
-This paper proposes a new method:
-
-First, we calculate the function-level CC for all files in the project using McCabe's method.Following Liu's mention of System Cyclomatic Complexity (SCC) in software evolution assessment techniques based on code change detection \cite{liuhuihui00}, we define SCC as the total sum of function-level values in the system.
-  The advantage is that it can avoid the use of complex methods, which will cause deviations to affect the classification results.
-  Additionally,due to the system's complexity being calculated based on a single function,it eliminates the problem of decreased detection performance caused by the conversion of such a large code structure of all modules into into abstract syntax tree and control flow graphs.
+\subsubsection{Implementation of RAX Tool}
+RAX obtains porting complexity vector through the CC calculation method and Arch\_code statistical value.\\
+This paper proposes a new CC method:
+ First, we calculate the function-level CC for all files in the project using McCabe's method. Following Liu's mention of System Cyclomatic Complexity (SCC) in software evolution assessment techniques based on code change detection \cite{liuhuihui00}, we define SCC as the total sum of function-level values in the system.
   Our CC calculation approach is expressed by equation (1) to (3),where lowercase cc represents the cyclomatic complexity at the function or file level.The uppercase CC represents the overall cyclomatic complexity of the software package,serving as a crucial factor in our tool.Here, |E| denotes the number of edges in the function control flow graph,and |N| represents the number of nodes.The function control flow graph is constructed based on branching structures such as if, while, and switch statements. 
   
   \begin{equation}
@@ -427,15 +431,6 @@ First, we calculate the function-level CC for all files in the project using McC
       \begin{equation}
         {CC} =  \sum_{i=1}^{k} {cc}({file})
         \end{equation}
-
-
-
-
-\subsubsection{Arch\_code scan function}
-Other tools only consider x86 architecture to locate architecture-related code for statistical analysis. We propose a new idea that explore whether multiple architectures can be selected or if other architectures can be individually targeted. Based on this, we conducted comparative experiments using various architectures, including X86, ARM, MIPS, RISCV, SPARC, and PowerPC. We performed scanning and counting based on the keyword and function dictionaries specific to each architecture, which were derived from common patterns summarized by official websites.
-By analyzing the correlation coefficient (Pearson's) between the keyword coverage line statistics of the six architectures and the score representing the porting complexity, we found that the correlation ranged from 0.44 to 0.58, indicating all correlation results are not significant. Additionally, the correlation between the total values for all architectures and score was only 0.49.
-Based on these results, analyze that our tool try to effectively assess the porting difficulty between two architectures. It is not as simple as adding up the modification amounts for different architectures, as it may only reflect an increase in code volume. Moreover, due to the large differences in row-based statistical results caused by the differences in code structure reflected by each architecture, this approach that easily considers all architectures simultaneously without considering the code structure and architectural weight lead to ambiguous outcomes.Therefore, based on these experiments, we still select x86 to build Arch\_code scan function, given its mainstream position.
-
 We form the Arch\_code dictionary:
 (1)\textit{Conditional compilation and architecture macros} Use conditional compilation statements, such as ``\texttt{if defined}'', ``\texttt{ifdef}'', in conjunction with all possible architecture macros,
   ``\texttt{\_\_x86\_64\_\_}''.
@@ -447,6 +442,25 @@ We form the Arch\_code dictionary:
   (4)\textit{System calls} Considering glibc's support for system call encapsulation, reorganize the sys-call dictionary.
   The system calls that do not support RISC-V have been filtered and collected currently.
   (5)\textit{Buildscripts} We locate architecture keywords in the build scripts.
+
+
+
+% \subsubsection{Arch\_code scan function}
+% Other tools only consider x86 architecture to locate architecture-related code for statistical analysis. We propose a new idea that explore whether multiple architectures can be selected or if other architectures can be individually targeted. Based on this, we conducted comparative experiments using various architectures, including X86, ARM, MIPS, RISCV, SPARC, and PowerPC. We performed scanning and counting based on the keyword and function dictionaries specific to each architecture, which were derived from common patterns summarized by official websites.
+% By analyzing the correlation coefficient (Pearson's) between the keyword coverage line statistics of the six architectures and the score representing the porting complexity, we found that the correlation ranged from 0.44 to 0.58, indicating all correlation results are not significant. Additionally, the correlation between the total values for all architectures and score was only 0.49.
+% Based on these results, analyze that our tool try to effectively assess the porting difficulty between two architectures. It is not as simple as adding up the modification amounts for different architectures, as it may only reflect an increase in code volume. Moreover, due to the large differences in row-based statistical results caused by the differences in code structure reflected by each architecture, this approach that easily considers all architectures simultaneously without considering the code structure and architectural weight lead to ambiguous outcomes.Therefore, based on these experiments, we still select x86 to build Arch\_code scan function, given its mainstream position.
+
+% We form the Arch\_code dictionary:
+% (1)\textit{Conditional compilation and architecture macros} Use conditional compilation statements, such as ``\texttt{if defined}'', ``\texttt{ifdef}'', in conjunction with all possible architecture macros,
+%   ``\texttt{\_\_x86\_64\_\_}''.
+%   We use an algorithm similar to bracket matching to cover all the code within macros, avoiding the impact of nested layers.
+%   (2)\textit{Assembly} We use matching forms such as ``\texttt{\_\_asm\_\_}'' and ``\texttt{\_\_volatile\_\_}''.
+%   In future work,we will consider striving to achieve the currently unachievable architecture identification function of assembly code and identify assembly code in the form of instructions;
+%   (3)\textit{Intrinsic and Builtin} 
+%   We compile dictionaries of Intrinsic and Builtin functions based on official documentation from x86\cite{x86intrin}.In the future,we may assign difficulty weights to them.
+%   (4)\textit{System calls} Considering glibc's support for system call encapsulation, reorganize the sys-call dictionary.
+%   The system calls that do not support RISC-V have been filtered and collected currently.
+%   (5)\textit{Buildscripts} We locate architecture keywords in the build scripts.
  
 \subsection{Evaluation}
 \subsubsection{Dataset}
