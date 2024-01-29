@@ -494,13 +494,13 @@ In our study, we opted to utilize Random Forest machine learning model for condu
 \subsubsection{Dataset}
  To evaluate RAX, We chose typical and popular C and C++ projects from upstream warehouse of the OpenEuler and GitHub\citep{stage2023}. First, we searched keywords "rv" or "riscv" and collected 139 projects as our training and testing dataset. Then, five postgraduate students are invited to tag the porting auxiliary for these projects. The evaluation scores are divided into three categories:low, medium, and high\citep{githubss}. Second, models are trained and tested based on the 139 projects. Third, to evaluate the RAX, additional 72 projects are collected and evaluated from GitHub. To gather response from developers, the community, forums, and emails were utilized. 
 \subsubsection{Result and Analysis}
-To solve the problem of unbalanced datasets and small sample datasets, we used ensemble learning methods \cite{6509481}, SMOTE \cite{4271036}, and random oversampling methods for data preprocessing\cite{5128907} addressing.
+To solve the problem of unbalanced datasets and small sample datasets, we used ensemble learning methods \cite{6509481}, SMOTE \cite{4271036}, and random oversampling methods for data preprocessing\cite{5128907} addressing. By comparing multiple indicators, we select the Random Forest\textcolor{red}{, which had the highest accuracy of 0.857} as the classifier, as shown in Table \ref{tab:evaluation}.
 % Ultimately, we chose to train four models:Random Forest, Support Vector Machine, Adaboost, and Xgboost.
 %By comparing multiple indicators, we select the Random Forest machine learning model as the classifier, as shown in Table \ref{tab:evaluation}.
 
 %To answer RQ 2, based on the work of Chen Xiang et al. \cite{5128907}, aiming at the status quo of unbalanced datasets and small sample datasets, we try to use ensemble learning methods \cite{6509481}, SMOTE \cite{4271036}, and random oversampling methods for data preprocessing.
 %Ultimately, we chose to train four models: Random Forest, Support Vector Machine, Adaboost, and Xgboost.
-By comparing multiple indicators, we select the Random Forest\textcolor{red}{, which had the highest accuracy of 0.857} as the classifier, as shown in Table \ref{tab:evaluation}.
+
 
 \begin{table}
   \caption{Experimental Results of Models}
