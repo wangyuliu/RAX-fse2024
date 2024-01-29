@@ -19,7 +19,7 @@
 \usepackage{hyperref}
 \usepackage{bbding}
 \usepackage{courier}
-\usepackage{inconsolata}
+
 
 \newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO:#1]}}}
 
@@ -379,6 +379,9 @@ In the end,our tool selection was CC and the Arch\_code build scanning tool,as s
 
 \section{RAX}
 The following is an introduction to the process of RAX construction, as shown in Figure \ref{fig:figure1}.
+During the analysis phase,architecture-related factors are obtained through the Commit tool for selection while investigating the impact of code complexity metrics on porting.
+A scanning tool is built to get potential modification workload.
+Finally,an appropriate machine learning model is selected as a classification.
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{figure1.pdf}
@@ -386,9 +389,6 @@ The following is an introduction to the process of RAX construction, as shown in
   \label{fig:figure1}
   \Description{Flow chart for method to build RAX}
 \end{figure}
-During the analysis phase,architecture-related factors are obtained through the Commit tool for selection while investigating the impact of code complexity metrics on porting.
-A scanning tool is built to get potential modification workload.
-Finally,an appropriate machine learning model is selected as a classification.
 
 % \subsection{Dataset}
 % We used the project upstream warehouse to build the data set,that projects mainly targeting C and C++ are from the OpenEuler list and GitHub,and invited 5 postgraduate students who are engaged in the research of RISC-V porting auxiliary tools to participate in the experimental evaluation.Specific evaluation methods can be found in \ref{sec:factor-1}. The evaluation scores are divided into three categories: low, medium, and high\citep{githuburl}.This includes 139 projects as training, testing, and validation datasets, while more than 80 additional projects were used as a tool effectiveness evaluation dataset. To gather insights from developers, the community, forums, and emails were utilized, resulting in over 51 meaningful feedback responses. In order to address the issue of data imbalance caused by collecting datasets solely from the openEuler mailing list, where more than 80\% of the projects were initially evaluated as having low porting complexity, a greater emphasis was placed on projects that had higher numbers of likes on GitHub and were deemed more important and active. Additionally, efforts were made to collect projects from the system bottom such as operating systems, kernel-level projects,mathematical computation libraries,and machine learning libraries to address RQ 2.
@@ -408,43 +408,44 @@ First, we calculate the function-level CC for all files in the project using McC
   Our CC calculation approach is expressed by equation (1) to (3),where lowercase cc represents the cyclomatic complexity at the function or file level.The uppercase CC represents the overall cyclomatic complexity of the software package,serving as a crucial factor in our tool.Here, |E| denotes the number of edges in the function control flow graph,and |N| represents the number of nodes.The function control flow graph is constructed based on branching structures such as if, while, and switch statements. 
   
   \begin{equation}
-    \mathrm{cc}(\mathrm{function}) = \lvert E \rvert - \lvert N \rvert + 2
+    {cc}({function}) = \lvert E \rvert - \lvert N \rvert + 2
     % \sum_{i=1}^{n} x_i
     \end{equation}
     \begin{equation}
-      \mathrm{cc}(\mathrm{file}) =  \sum_{i=1}^{n} \mathrm{cc}(\mathrm{function})
+      {cc}({file}) =  \sum_{i=1}^{n} 
+      {cc}({function})
       \end{equation}
       \begin{equation}
-        \mathrm{CC} =  \sum_{i=1}^{k} \mathrm{cc}(\mathrm{file})
+        {CC} =  \sum_{i=1}^{k} {cc}({file})
         \end{equation}
 
 
 
 
 \subsubsection{Arch\_code scan function}
-Other tools only consider x86 architecture to locate architecture-related code for statistical analysis. We propose a new idea that explore whether multiple architectures can be selected or if other architectures can be individually targeted. Based on this, we conducted comparative experiments using various architectures, including X86, ARM, MIPS, RISCV, SPARC, and PowerPC. We performed scanning and counting based on the keyword and function dictionaries specific to each architecture, which were derived from common patterns summarized from official websites.
-By analyzing the correlation coefficient (Pearson's) between the keyword coverage line statistics of the six architectures and the score representing the porting complexity, we found that the correlation ranged from 0.44 to 0.58, indicating an average correlation across all architectures. Additionally, the correlation between the total values for all architectures and score was only 0.49.
-Based on these results, analyze that our tool try to effectively assess the porting difficulty between two architectures. It is not as simple as adding up the modification amounts for different architectures, as it may only reflect an increase in code volume. Moreover, due to the large differences in row\_based statistical results caused by the differences in code structure reflected by each architecture, this approach that easily considers all architectures simultaneously without considering the code structure and architectural weight lead to ambiguous outcomes.Therefore, based on these experiments, we still select x86 to build Arch\_code scan function, given its mainstream position.
+Other tools only consider x86 architecture to locate architecture-related code for statistical analysis. We propose a new idea that explore whether multiple architectures can be selected or if other architectures can be individually targeted. Based on this, we conducted comparative experiments using various architectures, including X86, ARM, MIPS, RISCV, SPARC, and PowerPC. We performed scanning and counting based on the keyword and function dictionaries specific to each architecture, which were derived from common patterns summarized by official websites.
+By analyzing the correlation coefficient (Pearson's) between the keyword coverage line statistics of the six architectures and the score representing the porting complexity, we found that the correlation ranged from 0.44 to 0.58, indicating all correlation results are not significant. Additionally, the correlation between the total values for all architectures and score was only 0.49.
+Based on these results, analyze that our tool try to effectively assess the porting difficulty between two architectures. It is not as simple as adding up the modification amounts for different architectures, as it may only reflect an increase in code volume. Moreover, due to the large differences in row-based statistical results caused by the differences in code structure reflected by each architecture, this approach that easily considers all architectures simultaneously without considering the code structure and architectural weight lead to ambiguous outcomes.Therefore, based on these experiments, we still select x86 to build Arch\_code scan function, given its mainstream position.
 
 We form the Arch\_code dictionary:
-(1)\emph{Conditional compilation and architecture macros} Use conditional compilation statements, such as ``\texttt{if defined}'', ``\texttt{ifdef}'', in conjunction with all possible architecture macros,
+(1)\textit{Conditional compilation and architecture macros} Use conditional compilation statements, such as ``\texttt{if defined}'', ``\texttt{ifdef}'', in conjunction with all possible architecture macros,
   ``\texttt{\_\_x86\_64\_\_}''.
   We use an algorithm similar to bracket matching to cover all the code within macros, avoiding the impact of nested layers.
-  (2)\emph{Assembly} We use matching forms such as ``\texttt{\_\_asm\_\_}'' and ``\texttt{\_\_volatile\_\_}''.
+  (2)\textit{Assembly} We use matching forms such as ``\texttt{\_\_asm\_\_}'' and ``\texttt{\_\_volatile\_\_}''.
   In future work,we will consider striving to achieve the currently unachievable architecture identification function of assembly code and identify assembly code in the form of instructions;
-  (3)\emph{Intrinsic and Builtin} 
+  (3)\textit{Intrinsic and Builtin} 
   We compile dictionaries of Intrinsic and Builtin functions based on official documentation from x86\cite{x86intrin}.In the future,we may assign difficulty weights to them.
-  (4)\emph{System calls} Considering glibc's support for system call encapsulation, reorganize the sys-call dictionary.
+  (4)\textit{System calls} Considering glibc's support for system call encapsulation, reorganize the sys-call dictionary.
   The system calls that do not support RISC-V have been filtered and collected currently.
-  (5)\emph{Buildscripts} We locate architecture keywords in the build scripts.
+  (5)\textit{Buildscripts} We locate architecture keywords in the build scripts.
  
 \subsection{Evaluation}
 \subsubsection{Dataset}
-We used the project upstream warehouse to build the data set,which mainly targeting C and C++ are from the OpenEuler list and GitHub,and invited 5 postgraduate students who are engaged in the research of RISC-V porting auxiliary tools to participate in the experimental evaluation.Specific evaluation methods can be found in \ref{sec:factor-1}. The evaluation scores are divided into three categories: low, medium, and high\citep{githuburl}.This includes 139 projects as training, testing, and validation datasets, while more than 80 additional projects were used as a tool effectiveness evaluation dataset. To gather insights from developers, the community, forums, and emails were utilized, resulting in over 51 meaningful feedback responses. In order to address the issue of data imbalance caused by collecting datasets solely from the openEuler mailing list, where more than 80\% of the projects were initially evaluated as having low porting complexity, a greater emphasis was placed on projects that had higher numbers of likes on GitHub and were deemed more important and active. Additionally, efforts were made to collect projects from the system bottom such as operating systems, kernel-level projects,mathematical computation libraries,and machine learning libraries to address RQ 2.
+We used the project upstream warehouse to build the data set,which mainly targeting C and C++ are from the OpenEu-ler list and GitHub,and invited 5 postgraduate students who are engaged in the research of RISC-V porting auxiliary tools to participate in the experimental evaluation.Specific evaluation methods can be found in \ref{sec:factor-1}. The evaluation scores are divided into three categories: low, medium, and high\citep{githuburl}.This includes 139 projects as training, testing, and validation datasets, while more than 70 additional projects were used as a tool effectiveness evaluation dataset. To gather insights from developers, the community, forums, and emails were utilized, resulting in over 51 meaningful feedback responses. In order to address the issue of data imbalance caused by collecting datasets solely from the openEuler mailing list, where more than 80\% of the projects were initially evaluated as having low porting complexity, a greater emphasis was placed on projects that had higher numbers of likes on GitHub and were deemed more important and active. Additionally, efforts were made to collect projects from the system bottom such as operating systems, kernel-level projects,mathematical computation libraries,and machine learning libraries to address RQ 2.
 \subsubsection{Result and Analysis}
 To answer RQ 2, based on the work of Chen Xiang et al. \cite{5128907}, aiming at the status quo of unbalanced datasets and small sample datasets, we try to use ensemble learning methods \cite{6509481}, SMOTE \cite{4271036}, and random oversampling methods for data preprocessing.
 Ultimately, we chose to train four models: Random Forest, Support Vector Machine, Adaboost, and Xgboost.
-By comparing multiple indicators, we select the Random Forest machine learning as the classifier, as shown in Table \ref{tab:evaluation}.
+By comparing multiple indicators, we select the Random Forest machine learning model as the classifier, as shown in Table \ref{tab:evaluation}.
 
 \begin{table}
   \caption{Experimental results of models}
@@ -492,16 +493,15 @@ Chibios,u-boot are facing such a situation. Another reason is that we have added
 Within evaluation, there are instances of inaccurate predictions. Analysis of some variations reveals that certain projects exhibit inherent complexity, entailing a substantial presence of architecture-specific code defined by Arch\_code.
 Nevertheless, the practical porting process benefits from an array of auxiliary tools designed to support developers. In response to valuable suggestions from developers within the OpenEuler community, we conducted an evaluation of the porting complexity for various versions of the Chromium.Initially, we were able to accurately assess the porting complexity, yielding promising results. However, when it came to evaluating the work involved in iterative updates between versions, existing tools proved insufficient for precise estimation.Sometimes developers design their work with generic code for unknown architecture and CPU architecture parts are well separated from the common code,that just need only to adjust the moderate amount of code to recognize RISC-V,like nuttx.
 \section{Related Work}
-The development of the RISC-V ecosystem is rapidly progressing,and numerous studies also advance the RISC-V porting.
-Tine Blaise et al.\cite{osti_1830102} accomplished the porting of the OpenCL framework to commodity RISC-V CPU, thereby expanding RISC-V's accessibility to a wider range of scientific computing applications.
-Cheng Yuanhu et al.\cite{2017Slow}designed an automated porting framework to solve the problem of efficient porting of basic mathematics libraries.
+With the development of the RISC-V ecosystem,  projects of porting for RISC-V has attracted much attention in both academia and industry. For example,Tine Blaise et al.\cite{osti_1830102} accomplished the porting of the OpenCL framework to commodity RISC-V, thereby expanding RISC-V's accessibility to a wider range of scientific computing applications.
+Cao Hao et al.\cite{2017Slow}designed an automated porting framework to solve the problem of efficient porting of basic mathematics libraries.
 However,there is still a lack of fine-grained assistance tools for architecture portability evaluation.
 % Our work consider code complexity from the perspective of its evaluation role in software evolution and maintenance,mapping its influence on porting complexity evaluation\cite{1993Software}.
 Alvares et al. \cite{7844689} proposed using the development team's ``tolerance'' for code complexity to infer team development capabilities and performance indicators for projects.
 Vard et al. \cite{2017Evaluating} emphasized that the internal quality of software impacts developers' capabilities and maintenance duration.
 They conducted a comprehensive study on various existing code complexity metrics' validity and suggested incorporating empirically observed code features as complexity triggers.We have pioneered the application of code complexity metrics in the domain of porting assessment, while existing research primarily focuses on code refactoring and defect detection\cite{1993Software}.
 \section{Conclusion}
-The software porting work for RISC-V is being actively promoted, but it still faces the challenge of over-reliance on expert knowledge.We propose RAX, with the aim of recommending projects of varying porting difficulties to developers. Incorporate the code complexity to reflect developers' actual workload. We verified the effectiveness of the evaluation of 51 extension projects in real porting scenarios through their respective communities or forums. Observed significant performance improvements compared to existing tools.Moreover, RAX provides developers with the functionality to locate target code segments.Our next steps involve attempting text classification methods to categorize the text results of the original tool, designing more granular statistical methods for architecture-related factors.
+The software porting work for RISC-V is being actively promoted, but it still faces the challenge of over-reliance on expert knowledge.We propose RAX, with the aim of recommending projects of varying porting difficulties to developers. Our method incorporate the code complexity and architectural code to reflect developers' actual workload. We verified the effectiveness of the evaluation of 51 extension projects in real porting scenarios through their respective communities or forums. Observed significant performance improvements compared to existing tools.Moreover, RAX provides developers with the functionality to locate target code segments.Our next steps involve attempting text classification methods to categorize the text results of the original tool, designing more granular statistical methods for architecture-related factors.
 %%
 %% The acknowledgments section is defined using the "acks" environment
 %% (and NOT an unnumbered section). This ensures the proper
