@@ -280,16 +280,19 @@ We further collect other factors that may reflect the porting complexity,and sel
 
 
 \begin{table*}
-  \caption{Tool factors comparison}
+  \centering
+  \caption{Factors Among Different Tools}
+ %% \resizebox{0.48\textwidth}{!}{
   \label{tab:Tool}
   \begin{tabular}{ccccccccc}
     \toprule
     & Full Assembly & Inline Assembly & Intrinsic & Builtin & System Call & CCM & Buildscripts & CC \\
     \midrule
-   Other tool & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \XSolidBrush \\
+   Tool\textcolor{red}{\citep{2023du}} & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \XSolidBrush \\
     RAX & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold \\
   \bottomrule
 \end{tabular}
+ %% }
 \end{table*}
 
 
@@ -382,14 +385,16 @@ In the end,our tool selection was CC and the Arch\_code build scanning tool,as s
 % \end{table}
 
 \section{RAX}
-The following is an introduction to the process of RAX construction, as shown in Figure \ref{fig:figure1}.
-During the analysis phase,architecture-related factors are obtained through the Commit tool for selection while investigating the impact of code complexity metrics on porting.
-A scanning tool is built to get potential modification workload.
-Finally,an appropriate machine learning model is selected as a classification.
+\textcolor{red}{Since we identify architecture-relevant important
+factors affecting porting efficiency, we implement a fine-grained and automated tool to evaluate complexity. Figure \ref{fig:figure1} shows the entire technology roadmap in three parts such as Analysis, Data Collection and Evaluation. RAX can be deployed }
+\textcolor{blue}{The following is an introduction to the process of RAX construction, as shown in Figure \ref{fig:figure1}.
+During the analysis phase,architecture\-related factors are obtained through the Commit tool for selection while investigating the impact of code complexity metrics on porting.
+A scanning tool is built to get potential modification workload. Finally,an appropriate machine learning model is selected as a classification.}
+
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{figure1.pdf}
-  \caption{Flow chart for method to build RAX}
+  \caption{Flow Chart of RAX}
   \label{fig:figure1}
   \Description{Flow chart for method to build RAX}
 \end{figure}
