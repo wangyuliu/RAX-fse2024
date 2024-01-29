@@ -178,7 +178,7 @@ RISC-V Instruction Set Architecture (ISA) has garnered significant attention fro
 
 Despite the rapid development of the RISC-V ISA, which foundational software such as operating systems and compilers are relatively mature, there is still a significant demand for porting a large number of application software\citep{2019Notary}.To adapt to the RISC-V,efficiently porting is greatly depending on prior knowledge of experts, and the lack of standardized evaluation criteria for software portability can lead to unreasonable development planning.Therefore, it is desirable to propose a method that automates the evaluation of porting complexity.This will enable different development teams to access software packages that are tailored to their abilities, thus assisting distribution vendors in the porting of RISC-V architecture.  
 
-Many related works focus on the code complexity and portability evaluation,but studies for CPU architectures are currently lacking in these areas\cite{2016helei},\cite{TAHIR2016101},\cite{Sholiq_2021}.Du et al. have developed a basic statistical evaluation plan for CPU architecture code\citep{2023du},however,their work lacks a thorough validity analysis of factors,and may not consider the complexity factors associated with the software operation and maintenance process.
+Many related works focus on the code complexity and portability evaluation,but studies for CPU architectures are currently lacking in these areas\cite{2016helei},\cite{TAHIR2016101},\cite{Sholiq_2021}.Du et al. have developed a basic statistical evaluation plan for CPU architecture code\citep{2023du}.However,their work lacks a thorough validity analysis of factors,and may not consider the complexity factors associated with the software operation and maintenance process.
 To overcome these challenges, we propose RAX, an effective porting
 complexity evaluation tool which accurately locates the CPU architecture code and calculates the code complexity of the software.The contributions of this paper are as follows:
 \begin{itemize}
@@ -433,8 +433,7 @@ We form the Arch\_code dictionary:
   (2)\emph{Assembly} We use matching forms such as ``\texttt{\_\_asm\_\_}'' and ``\texttt{\_\_volatile\_\_}''.
   In future work,we will consider striving to achieve the currently unachievable architecture identification function of assembly code and identify assembly code in the form of instructions;
   (3)\emph{Intrinsic and Builtin} 
-  We compile dictionaries of Intrinsic functions based on official documentation from x86\cite{x86intrin}.
-  Builtin function also employ a similar approach;In the future,we may assign difficulty weights to them.
+  We compile dictionaries of Intrinsic and Builtin functions based on official documentation from x86\cite{x86intrin}.In the future,we may assign difficulty weights to them.
   (4)\emph{System calls} Considering glibc's support for system call encapsulation, reorganize the sys-call dictionary.
   The system calls that do not support RISC-V have been filtered and collected currently.
   (5)\emph{Buildscripts} We locate architecture keywords in the build scripts.
@@ -493,14 +492,14 @@ Chibios,u-boot are facing such a situation. Another reason is that we have added
 Within evaluation, there are instances of inaccurate predictions. Analysis of some variations reveals that certain projects exhibit inherent complexity, entailing a substantial presence of architecture-specific code defined by Arch\_code.
 Nevertheless, the practical porting process benefits from an array of auxiliary tools designed to support developers. In response to valuable suggestions from developers within the OpenEuler community, we conducted an evaluation of the porting complexity for various versions of the Chromium.Initially, we were able to accurately assess the porting complexity, yielding promising results. However, when it came to evaluating the work involved in iterative updates between versions, existing tools proved insufficient for precise estimation.Sometimes developers design their work with generic code for unknown architecture and CPU architecture parts are well separated from the common code,that just need only to adjust the moderate amount of code to recognize RISC-V,like nuttx.
 \section{Related Work}
-The development of the RISC-V ecosystem is rapidly progressing.
-In the realm of scientific computing, Tine Blaise et al. \cite{osti_1830102} accomplished the porting of the OpenCL framework to commodity RISC-V CPU, thereby expanding RISC-V's accessibility to a wider range of scientific computing applications.
-Cheng Yuanhu et al. \cite{2017Slow} designed an embedded multi-instruction set processor,addressing the software ecosystem challenges present in the RISC-V embedded domain.
-Therefore, auxiliary efforts in porting are highlighted as valuable endeavors.
-Our work consider code complexity from the perspective of its evaluation role in software evolution and maintenance,mapping its influence on porting complexity evaluation \cite{1993Software}.
+The development of the RISC-V ecosystem is rapidly progressing,and numerous studies also advance the RISC-V porting.
+Tine Blaise et al.\cite{osti_1830102} accomplished the porting of the OpenCL framework to commodity RISC-V CPU, thereby expanding RISC-V's accessibility to a wider range of scientific computing applications.
+Cheng Yuanhu et al.\cite{2017Slow}designed an automated porting framework to solve the problem of efficient porting of basic mathematics libraries.
+However,there is still a lack of fine-grained assistance tools for architecture portability evaluation.
+% Our work consider code complexity from the perspective of its evaluation role in software evolution and maintenance,mapping its influence on porting complexity evaluation\cite{1993Software}.
 Alvares et al. \cite{7844689} proposed using the development team's ``tolerance'' for code complexity to infer team development capabilities and performance indicators for projects.
 Vard et al. \cite{2017Evaluating} emphasized that the internal quality of software impacts developers' capabilities and maintenance duration.
-They conducted a comprehensive study on various existing code complexity metrics' validity and suggested incorporating empirically observed code features as complexity triggers.
+They conducted a comprehensive study on various existing code complexity metrics' validity and suggested incorporating empirically observed code features as complexity triggers.We have pioneered the application of code complexity metrics in the domain of porting assessment, while existing research primarily focuses on code refactoring and defect detection\cite{1993Software}.
 \section{Conclusion}
 The software porting work for RISC-V is being actively promoted, but it still faces the challenge of over-reliance on expert knowledge.We propose RAX, with the aim of recommending projects of varying porting difficulties to developers. Incorporate the code complexity to reflect developers' actual workload. We verified the effectiveness of the evaluation of 51 extension projects in real porting scenarios through their respective communities or forums. Observed significant performance improvements compared to existing tools.Moreover, RAX provides developers with the functionality to locate target code segments.Our next steps involve attempting text classification methods to categorize the text results of the original tool, designing more granular statistical methods for architecture-related factors.
 %%
