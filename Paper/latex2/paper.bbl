@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{21}
+\begin{thebibliography}{26}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -74,14 +74,38 @@
 \tempurl}
 
 
-\bibitem[\protect\citeauthoryear{??}{git}{2023}]%
+\bibitem[\protect\citeauthoryear{??}{git}{2023a}]%
+        {githubss}
+ \bibinfo{year}{2023}\natexlab{a}.
+\newblock \showarticletitle{porting complexity evaluation details}.
+\newblock  (\bibinfo{year}{2023}).
+\newblock
+\urldef\tempurl%
+\url{https://github.com/wangyuliu/RAX-2024/Data}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{??}{git}{2023b}]%
         {githuburl}
- \bibinfo{year}{2023}\natexlab{}.
+ \bibinfo{year}{2023}\natexlab{b}.
 \newblock \showarticletitle{porting complexity experimental evaluation}.
 \newblock  (\bibinfo{year}{2023}).
 \newblock
 \urldef\tempurl%
-\url{https://}
+\url{https://github.com/wangyuliu/RAX-2024}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{??}{x86}{2023}]%
+        {x86intrin}
+ \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{x86 Intrinsic}.
+\newblock  (\bibinfo{year}{2023}).
+\newblock
+\urldef\tempurl%
+\url{https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html}
 \showURL{%
 \tempurl}
 
@@ -212,6 +236,19 @@
   planning system based on RPM source package dependency}.
 \newblock  (\bibinfo{year}{2023}).
 \newblock
+\urldef\tempurl%
+\url{https://gitee.com/randomwebsite/risc-v-porting-task-planning-system}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Lei}{Lei}{2016}]%
+        {2016helei}
+\bibfield{author}{\bibinfo{person}{He Lei}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Code Complexity Based Software Evolution Evaluation
+  and Analysis}.
+\newblock  (\bibinfo{year}{2016}).
+\newblock
 
 
 \bibitem[\protect\citeauthoryear{Liang~GY and C}{Liang~GY and C}{2020}]%
@@ -265,6 +302,40 @@
   \bibinfo{booktitle}{\emph{2017 27th International Symposium on Power and
   Timing Modeling, Optimization and Simulation (PATMOS)}}.
 \newblock
+
+
+\bibitem[\protect\citeauthoryear{Sholiq, Auda, Subriadi, Tjahyanto, and
+  Wulandari}{Sholiq et~al\mbox{.}}{2021}]%
+        {Sholiq_2021}
+\bibfield{author}{\bibinfo{person}{Sholiq}, \bibinfo{person}{R~A Auda},
+  \bibinfo{person}{A~P Subriadi}, \bibinfo{person}{A Tjahyanto}, {and}
+  \bibinfo{person}{A~D Wulandari}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Measuring software quality with usability,
+  efficiency, and portability characteristics}.
+\newblock \bibinfo{journal}{\emph{IOP Conference Series: Earth and
+  Environmental Science}} \bibinfo{volume}{704}, \bibinfo{number}{1}
+  (\bibinfo{date}{mar} \bibinfo{year}{2021}), \bibinfo{pages}{012039}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1088/1755-1315/704/1/012039}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Tahir, Rasool, and Gencel}{Tahir
+  et~al\mbox{.}}{2016}]%
+        {TAHIR2016101}
+\bibfield{author}{\bibinfo{person}{Touseef Tahir}, \bibinfo{person}{Ghulam
+  Rasool}, {and} \bibinfo{person}{Cigdem Gencel}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{A systematic literature review on software
+  measurement programs}.
+\newblock \bibinfo{journal}{\emph{Information and Software Technology}}
+  \bibinfo{volume}{73} (\bibinfo{year}{2016}), \bibinfo{pages}{101--121}.
+\newblock
+\showISSN{0950-5849}
+\urldef\tempurl%
+\url{https://doi.org/10.1016/j.infsof.2016.01.014}
+\showDOI{\tempurl}
 
 
 \bibitem[\protect\citeauthoryear{Tine, Lee, Vetter, and Kim}{Tine

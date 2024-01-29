@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.10)  29 JAN 2024 10:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.10.10)  29 JAN 2024 12:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -772,39 +772,44 @@ Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
  Excluding 'CCSXML' comment.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 176.
-LaTeX Font Info:    Trying to load font information for T1+LinuxBiolinumT-TLF on input line 176.
+(Font)              scaled to size 17.28pt on input line 172.
+LaTeX Font Info:    Trying to load font information for T1+LinuxBiolinumT-TLF on input line 172.
  (d:/texlive/2020/texmf-dist/tex/latex/libertine/T1LinuxBiolinumT-TLF.fd
 File: T1LinuxBiolinumT-TLF.fd 2017/03/20 (autoinst) Font definitions for T1/LinuxBiolinumT-TLF.
 )
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 176.
+(Font)              scaled to size 17.28pt on input line 172.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxBiolinumT-TLF' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/b/n' will be
-(Font)              scaled to size 17.28pt on input line 176.
+(Font)              scaled to size 17.28pt on input line 172.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 176.
+(Font)              scaled to size 12.0pt on input line 172.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 176.
+(Font)              scaled to size 10.0pt on input line 172.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 9.0pt on input line 176.
+(Font)              scaled to size 9.0pt on input line 172.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 10.95pt on input line 176.
-LaTeX Font Info:    Trying to load font information for TS1+LinuxLibertineT-TLF on input line 176.
- (d:/texlive/2020/texmf-dist/tex/latex/libertine/TS1LinuxLibertineT-TLF.fd
+(Font)              scaled to size 10.95pt on input line 172.
+
+Overfull \hbox (1.3505pt too wide) in paragraph at lines 172--172
+\T1/LinuxLibertineT-TLF/m/n/9 (-20) video demo at [][]https://www.youtube.com/watch?v=SLphW3Ra4WM[][]. 
+ []
+
+LaTeX Font Info:    Trying to load font information for TS1+LinuxLibertineT-TLF on input line 172.
+(d:/texlive/2020/texmf-dist/tex/latex/libertine/TS1LinuxLibertineT-TLF.fd
 File: TS1LinuxLibertineT-TLF.fd 2017/03/20 (autoinst) Font definitions for TS1/LinuxLibertineT-TLF.
 )
 LaTeX Font Info:    Font shape `TS1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 176.
+(Font)              scaled to size 9.0pt on input line 172.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 176.
+(Font)              scaled to size 9.0pt on input line 172.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
@@ -815,104 +820,105 @@ File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 176.
+(Font)              scaled to size 9.0pt on input line 172.
 
-Overfull \hbox (3.82579pt too wide) in paragraph at lines 176--176
+Overfull \hbox (3.82579pt too wide) in paragraph at lines 172--172
 \TS1/LinuxLibertineT-TLF/m/n/9 ˆ \T1/LinuxLibertineT-TLF/b/n/9 Soft-ware and its en-gi-neer-ing $\LMS/ntxsy/m/n/9 !$ \T1/LinuxLibertineT-TLF/b/n/9 Soft-ware li-braries and repos-
  []
 
-
-Overfull \hbox (1.8392pt too wide) in paragraph at lines 190--191
-[]\T1/LinuxLibertineT-TLF/m/n/9 (-20) Optimization As-sess-ment Tool.Tuning ma-chine learn-ing mod-
- []
-
-<figure1.pdf, id=53, 845.1575pt x 597.23125pt>
+<figure1.pdf, id=61, 845.1575pt x 597.23125pt>
 File: figure1.pdf Graphic file (type pdf)
 <use figure1.pdf>
-Package pdftex.def Info: figure1.pdf  used on input line 202.
+Package pdftex.def Info: figure1.pdf  used on input line 200.
 (pdftex.def)             Requested size: 241.14749pt x 170.40404pt.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.0pt on input line 220.
-[1.1{d:/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
-
-]
-LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 223.
-LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 223.
-<figure2.pdf, id=84, 462.52798pt x 346.89601pt>
+<figure2.pdf, id=62, 462.52798pt x 346.89601pt>
 File: figure2.pdf Graphic file (type pdf)
 <use figure2.pdf>
-Package pdftex.def Info: figure2.pdf  used on input line 237.
+Package pdftex.def Info: figure2.pdf  used on input line 213.
 (pdftex.def)             Requested size: 241.14749pt x 180.86334pt.
 
-Overfull \hbox (15.44655pt too wide) in paragraph at lines 244--247
-\T1/LinuxLibertineT-TLF/m/n/9 (-20) macro(ccm) struc-ture, In-trin-sic func-tions, Builtin func-tions, architecture-
+Overfull \hbox (1.8767pt too wide) in paragraph at lines 219--225
+[]\T1/LinuxLibertineT-TLF/m/n/9 (-20) To an-swer RQ 1,this sec-tion pro-vides a va-lid-ity anal-y-sis of porting-
  []
 
-<figure3.pdf, id=86, 722.7pt x 722.7pt>
-File: figure3.pdf Graphic file (type pdf)
-<use figure3.pdf>
-Package pdftex.def Info: figure3.pdf  used on input line 276.
-(pdftex.def)             Requested size: 241.14749pt x 241.14935pt.
-LaTeX Font Info:    Trying to load font information for U+ding on input line 325.
-(d:/texlive/2020/texmf-dist/tex/latex/bbding/Uding.fd
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 6.0pt on input line 225.
+[1.1{d:/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+ <./figure1.pdf>]
+LaTeX Font Info:    Trying to load font information for U+ding on input line 278.
+ (d:/texlive/2020/texmf-dist/tex/latex/bbding/Uding.fd
 File: Uding.fd 1996/02/01 v1.0 BBding font definitions
 )
-Overfull \hbox (12.00488pt too wide) in paragraph at lines 315--326
- [][] 
- []
+<figure3.pdf, id=94, 722.7pt x 722.7pt>
+File: figure3.pdf Graphic file (type pdf)
+<use figure3.pdf>
+Package pdftex.def Info: figure3.pdf  used on input line 288.
+(pdftex.def)             Requested size: 241.14749pt x 241.14935pt.
 
-
-Underfull \vbox (badness 2529) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 345.
- [2.2 <./figure1.pdf> <./figure2.pdf>]
-Underfull \vbox (badness 1009) has occurred while \output is active []
+(Font)              scaled to size 9.0pt on input line 378.
+LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
+(Font)              scaled to size 7.0pt on input line 378.
+ [2.2 <./figure2.pdf> <./figure3.pdf
 
- [3.3 <./figure3.pdf>] Excluding 'acks' comment. (./paper.bbl [4.4]
+pdfTeX warning: pdflatex.exe (file ./figure3.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>]
+LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/it' will be
+(Font)              scaled to size 9.0pt on input line 387.
+ [3.3] Excluding 'acks' comment. [4.4] (./paper.bbl
 LaTeX Info: Redefining \tempurl on input line 60.
 LaTeX Info: Redefining \tempurl on input line 72.
 LaTeX Info: Redefining \tempurl on input line 84.
+LaTeX Info: Redefining \tempurl on input line 96.
+LaTeX Info: Redefining \tempurl on input line 108.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 7.0pt on input line 98.
-LaTeX Info: Redefining \tempurl on input line 138.
-LaTeX Info: Redefining \tempurl on input line 156.
-LaTeX Info: Redefining \tempurl on input line 193.
-LaTeX Info: Redefining \tempurl on input line 238.
-LaTeX Info: Redefining \tempurl on input line 252.
-LaTeX Info: Redefining \tempurl on input line 280.
-LaTeX Info: Redefining \tempurl on input line 296.
+(Font)              scaled to size 7.0pt on input line 122.
+LaTeX Info: Redefining \tempurl on input line 162.
+LaTeX Info: Redefining \tempurl on input line 180.
+LaTeX Info: Redefining \tempurl on input line 217.
+LaTeX Info: Redefining \tempurl on input line 240.
+LaTeX Info: Redefining \tempurl on input line 275.
+LaTeX Info: Redefining \tempurl on input line 289.
+LaTeX Info: Redefining \tempurl on input line 320.
+LaTeX Info: Redefining \tempurl on input line 337.
+LaTeX Info: Redefining \tempurl on input line 351.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \tempurl on input line 367.
 )
 
 Class acmart Warning: ACM reference format is mandatory for papers over one page.
 
 
-Overfull \vbox (1.452pt too high) has occurred while \output is active []
+Package balance Warning: You have called \balance in second column
+(balance)                Columns might not be balanced.
 
- [5.5]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 469.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 469.
+[5.5]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 509.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 509.
  (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 469.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 469.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 509.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 509.
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: C16FA549A5E0C0ED424E8A081DAC5C48;1104.
+(rerunfilecheck)             Checksum: AEC28D84C3FF82F87B835C0A2B416872;1402.
  ) 
 Here is how much of TeX's memory you used:
- 19606 strings out of 482503
- 297197 string characters out of 5950823
- 622479 words of memory out of 5000000
- 34375 multiletter control sequences out of 15000+600000
- 651503 words of font info for 251 fonts, out of 8000000 for 9000
+ 19646 strings out of 482503
+ 297956 string characters out of 5950823
+ 619728 words of memory out of 5000000
+ 34392 multiletter control sequences out of 15000+600000
+ 656953 words of font info for 271 fonts, out of 8000000 for 9000
  197 hyphenation exceptions out of 8191
- 63i,16n,100p,1318b,592s stack positions out of 5000i,500n,10000p,200000b,80000s
-{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_oexx6f.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_naooyc.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}<d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinumT.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinumTB.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinumTI.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinLibertineT.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinLibertineTB.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinLibertineTI.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/niceframe-type1/bbding10.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/txsys.pfb>
-Output written on paper.pdf (5 pages, 514383 bytes).
+ 63i,16n,100p,1372b,544s stack positions out of 5000i,500n,10000p,200000b,80000s
+{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_oexx6f.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_7grukw.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_naooyc.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_nh77jq.enc}{d:/texlive/2020/texmf-dist/fonts/enc/dvips/libertine/lbtn_76gpa5.enc}<d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/LibertineMathMI.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/LibertineMathMI7.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinumT.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinumTB.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinBiolinumTI.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinLibertineT.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinLibertineTB.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/libertine/LinLibertineTI.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/niceframe-type1/bbding10.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/txexs.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb><d:/texlive/2020/texmf-dist/fonts/type1/public/newtx/txsys.pfb>
+Output written on paper.pdf (5 pages, 538079 bytes).
 PDF statistics:
- 304 PDF objects out of 1000 (max. 8388607)
- 211 compressed objects within 3 object streams
- 61 named destinations out of 1000 (max. 500000)
- 37996 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 343 PDF objects out of 1000 (max. 8388607)
+ 242 compressed objects within 3 object streams
+ 60 named destinations out of 1000 (max. 500000)
+ 38004 words of extra memory for PDF output out of 42996 (max. 10000000)
 
