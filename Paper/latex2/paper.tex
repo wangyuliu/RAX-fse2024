@@ -119,7 +119,7 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-  In recent years, the open-source and reduced features of the RISC-V have led to active promotion of porting within the industry.Due to the lack of publicly available standards for assessing software portability, the software porting process for the RISC-V architecture has been predominantly reliant on expert experience, presenting obstacles. RAX is a automated tool which aids the C/C++ programmer in evaluating  complexity of projects during porting for RISC-V.RAX provides precise evaluation solutions and establishes a high-quality dataset for porting complexity assessment,enabling recommendations of suitable software with difficulty levels for developers of varying skill levels.We continue to expand the dataset and conduct effective evaluations of the tool within the open-source community.We have gathered valuable feedback, including 47 positive responses, from 51 specific open-source projects.Interested users can explore the open-source implementation of RAX at \href{https://github.com/wangyuliu/RAX-2024}{https://github.co\\m/wangyuliu/RAX-2024}, or watch the RAX video demo at \href{https://www.youtube.com/watch?v=SLphW3Ra4WM}{https://w\\ww.youtube.com/watch?v=SLphW3Ra4WM}.
+  In recent years, the open-source and reduced features of the RISC-V have led to active promotion of porting within the industry.Due to the lack of publicly available standards for assessing software portability, the software porting process for the RISC-V architecture has been predominantly reliant on expert experience, presenting obstacles. RAX is a automated tool which aids the C/C++ programmer in evaluating  complexity of projects during porting for RISC-V.RAX provides precise evaluation solutions and establishes a high-quality dataset for porting complexity assessment,enabling recommendations of suitable software with difficulty levels for developers of varying skill levels.We evaluate RAX on 72 popular and typical real-world C/C++ projects. The experimental result shows that 51 of them have been confirmed by developers within community.Interested users can explore the open-source implementation of RAX at \href{https://github.com/wangyuliu/RAX-2024}{https://github.com/wangyuliu/RAX-2024}, or watch the RAX video demo at \href{https://www.youtube.com/watch?v=SLphW3Ra4WM}{https://www.youtube.com/watch?v=SLphW3Ra4WM}.
 \end{abstract}
 
 %%
@@ -177,9 +177,11 @@ Many related works focus on the code complexity and portability evaluation\cite{
 To overall these challenges, we propose RAX, a effective porting
 complexity evaluation tool.The contributions of this paper are as follows:
 \begin{enumerate}
-  \item Discover new factors. Investigate the role of Cyclomatic Complexity in porting scenarios.
-  \item We explore building high-quality datasets that can cover various porting scenarios to solve the problem of imbalanced datasets of existing tools.Tuning machine learning models to address ambiguous identification of samples of medium and hard complexity compared to other studies.
-  \item We nearly doubled the dataset compared to other tool,and verified the effectiveness of the evaluation of 51 extension projects in real porting scenarios through their respective communities or forums.Our findings indicate that RAX outperforms other tool, delivering substantial improvements in terms of accuracy.
+  \item Identify the factor of Cyclomatic Complexity(CC) and investigate its value in porting scenarios.
+  % \item We explore building high-quality datasets that can cover various porting scenarios to solve the problem of imbalanced datasets of existing tools.Tuning machine learning models to address ambiguous identification of samples of medium and hard complexity compared to other studies.
+  \item Construct a model to assess the complexity of software porting and implement automated RAX.
+  % \item We nearly doubled the dataset compared to other tool,and verified the effectiveness of the evaluation of 51 extension projects in real porting scenarios through their respective communities or forums.Our findings indicate that RAX outperforms other tool, delivering substantial improvements in terms of accuracy.
+  \item Verify the effectiveness of RAX in real scenarios.We sent out 72 assessment inquiries to the developer community and received 51 valuable feedback responses, out of which 47 confirmed the accurate predictions made by RAX for their respective projects.Our findings indicate that RAX outperforms other tool, delivering substantial improvements in terms of accuracy.
 \end{enumerate}
 
 
@@ -432,7 +434,7 @@ By comparing multiple indicators, we select the Random Forest machine learning a
 \end{tabular}
 \end{table}
 
-We continued to expand 100 projects as a supplementary data set, and the prediction results were determined through comments from the community and forum.
+We continued to expand 72 projects as a supplementary data set, and the prediction results were determined through comments from the community and forum.
 Github presents comparison\cite{githubss} with the porting complexity evaluation tool developed by Du et al. across various projects, the comparison results are shown in Table \ref{tab:effectiveness}.Through real-world evaluations within the developer community, our tool has exhibited a significant improvement in accuracy, surpassing other comparable tools by a margin of 15.6\%. In Github, we provide a comprehensive compilation of the community's valuable feedback comments, accompanied by the relevant web links for further reference and validation.
 
 \begin{table}
