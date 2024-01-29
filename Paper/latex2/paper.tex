@@ -171,25 +171,29 @@
 \maketitle
 
 \section{Introduction}
-\textcolor{black}{In recent years, the RISC-V Instruction Set Architecture (ISA) has garnered significant attention from academia, and particularly the industry, due to its open-source and reduced design\citep{2014The}.OpenEuler has joined RISC-V International organization, and RISC-V has officially become openEuler's official support architecture.The mainline integration of openEuler RISC-V 23.09 was finished by the RISC-V SIG.The main repository of openEuler 23.03 has successfully ported 4,244 software packages to the RISCV64,while the openEuler 23.09 main repository has currently completed the porting work of 5,694 software packages\citep{osti_1560132}.OpenCloudOS Kernel Stream 2207.2 kernel version adds support for the RISC-V 64 architecture\citep{osti_1560133}.  
-   Despite the rapid development of the RISC-V ISA, which foundational software such as operating systems and compilers are relatively mature, there is still a significant demand for porting a large number of application software\citep{2019Notary}.To adapt to the RISC-V,efficiently porting is greatly depending on domain expertise, and the lack of standardized evaluation criteria for software portability can lead to misallocation of resources.Therefore, it is desirable to propose a method that automates the assessment of porting complexity,this will enable different development teams to access software packages that are tailored to their proficiency levels, thus assisting distribution vendors in the porting of RISC-V architecture.
-Many related works focus on the code complexity and portability evaluation\cite{2016helei},\cite{TAHIR2016101},\cite{Sholiq_2021}.Du et al. have developed a basic statistical evaluation plan for CPU architecture code\citep{2023du},however,their work lacks a thorough validity analysis of factors,and fails to consider the complexity factors associated with the software operation and maintenance process.}
+In recent years, the RISC-V Instruction Set Architecture (ISA) has garnered significant attention from academia, and particularly the industry, due to its open-source and reduced design\citep{2014The}.OpenEuler has joined RISC-V International organization, and RISC-V has officially become openEuler's official support architecture.The mainline integration of openEuler RISC-V 23.09 was finished by the RISC-V SIG.The main repository of openEuler 23.03 has successfully ported 4,244 software packages to the RISCV64,while the openEuler 23.09 main repository has currently completed the porting work of 5,694 software packages\citep{osti_1560132}.OpenCloudOS Kernel Stream 2207.2 kernel version adds support for the RISC-V 64 architecture\citep{osti_1560133}.  
+
+Despite the rapid development of the RISC-V ISA, which foundational software such as operating systems and compilers are relatively mature, there is still a significant demand for porting a large number of application software\citep{2019Notary}.To adapt to the RISC-V,efficiently porting is greatly depending on domain expertise, and the lack of standardized evaluation criteria for software portability can lead to misallocation of resources.Therefore, it is desirable to propose a method that automates the assessment of porting complexity,this will enable different development teams to access software packages that are tailored to their proficiency levels, thus assisting distribution vendors in the porting of RISC-V architecture.  
+
+Many related works focus on the code complexity and portability evaluation\cite{2016helei},\cite{TAHIR2016101},\cite{Sholiq_2021}.Du et al. have developed a basic statistical evaluation plan for CPU architecture code\citep{2023du},however,their work lacks a thorough validity analysis of factors,and fails to consider the complexity factors associated with the software operation and maintenance process.
 To overall these challenges, we propose RAX, a effective porting
 complexity evaluation tool.The contributions of this paper are as follows:
 \begin{enumerate}
-  \item Identify the factor of Cyclomatic Complexity(CC) and investigate its value in porting scenarios.
+  \item Identify one of the most important factors,Cyclomatic Complexity(CC), and investigate its significant value in porting scenarios.
   % \item We explore building high-quality datasets that can cover various porting scenarios to solve the problem of imbalanced datasets of existing tools.Tuning machine learning models to address ambiguous identification of samples of medium and hard complexity compared to other studies.
-  \item Construct a model to assess the complexity of software porting and implement automated RAX.
+  \item We propose RAX, an automated tool to efficiently assess the complexity of software during porting to the RISC-V.
   % \item We nearly doubled the dataset compared to other tool,and verified the effectiveness of the evaluation of 51 extension projects in real porting scenarios through their respective communities or forums.Our findings indicate that RAX outperforms other tool, delivering substantial improvements in terms of accuracy.
-  \item Verify the effectiveness of RAX in real scenarios.We sent out 72 assessment inquiries to the developer community and received 51 valuable feedback responses, out of which 47 confirmed the accurate predictions made by RAX for their respective projects.Our findings indicate that RAX outperforms other tool, delivering substantial improvements in terms of accuracy.
+  \item Verify the effectiveness of RAX in real scenarios concentrating C/C++ projects. Our findings indicate that RAX outperforms other tool, delivering substantial improvements in terms of accuracy.
 \end{enumerate}
 
+The remainder of this paper is organized as follows. Section2 analyze architecture-related factors briefly. Section 3 presents the implementation and evaluation of RAX. Section 4 and 5 presents related work and conclusions.
 
-\section{RAX}
-The following is an introduction to the process of RAX construction, as shown in Figure \ref{fig:figure1}.
-During the analysis phase,architecture-related factors are obtained through the Commit tool for selection while investigating the impact of code complexity metrics on porting.
-A scanning tool is built to get potential modification workload.
-Finally,an appropriate machine learning model is selected as a classification.
+
+% \section{RAX}
+% The following is an introduction to the process of RAX construction, as shown in Figure \ref{fig:figure1}.
+% During the analysis phase,architecture-related factors are obtained through the Commit tool for selection while investigating the impact of code complexity metrics on porting.
+% A scanning tool is built to get potential modification workload.
+% Finally,an appropriate machine learning model is selected as a classification.
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{figure1.pdf}
@@ -197,7 +201,7 @@ Finally,an appropriate machine learning model is selected as a classification.
   \label{fig:figure1}
   \Description{Flow chart for method to build RAX}
 \end{figure}
-\subsection{Motivation}
+\section{Motivation}
 To design RAX that assists developers with porting work,the following research questions are proposed:
 
 \textbf{RQ 1:} How can we select architecture-relevant actors that is fine-grained to design an automated assessment tool of porting complexity?
@@ -217,9 +221,9 @@ The software metrics of code Cyclomatic Complexity(CC) can help developers make 
 At present, CC indicators are mostly used in project code quality assessment, defect inspection, code reconstruction, etc \cite{1991Cyclomatic}.
 During the porting process, developers will target a large number of project source codes,build scripts,assembly codes,and a macro understanding of the project is required in the early stage of porting.
 This part of the work has a lot of overlap with the scope of code complexity.Through our survey of community, we discovered that even though architectural code can be separated quite clearly from common code, when faced with large-scale projects, we still require numerous iterative tests to uncover unknown architectural code. Building upon this, we delve into the quantification of the significance of cyclomatic complexity in porting work.
-\subsubsection{Factor 1: Cyclomatic Complex(CC)}
+\subsection{Factor 1: Cyclomatic Complex(CC)}
 \label{sec:factor-1}
-We uses the lizard CC detection tool and optimize its functions,and it will introduce it in Section \ref{sec:method}.
+We uses the lizard CC detection tool and optimize its functions,and it will introduce it in Section \ref{sec:Implementation}.
 This study analyzes the relationship between CC and software porting complexity using the Spearman Rank correlation coefficient analysis method.
 We invited five Master's students who are engaged in research on porting auxiliary tools to score the porting complexity(score) of 131 software adapted for RISC-V,collected from the OpenEuler list\citep{stage2023} and GitHub.
 According to the collection of Internet events, log analysis, source code dismantling, and similar project analogy \cite{liangguanyu2020}, we form a scoring interval in the range of $[0,5]$.
@@ -231,7 +235,7 @@ This is because developers need a holistic understanding of the project during t
 
 
 Second, we consider the effectiveness of the architecture binding code structure proposed by the other tool and conduct comparative experiments using more potential factors.
-\subsubsection{Factor2:Arch\_code}
+\subsection{Factor2:Arch\_code}
 
 We select factors with the greatest potential from existing tool and define Arch\_code.
 Arch\_code includes assembly code, conditional compilation and macro structure(CCM), Intrinsic functions, Builtin functions, architecture-related build scripts, and system calls.
@@ -365,13 +369,17 @@ In the end,our tool selection was CC and the Arch\_code build scanning tool,as s
 % \end{tabular}
 % \end{table}
 
+\section{RAX}
+The following is an introduction to the process of RAX construction, as shown in Figure \ref{fig:figure1}.
+During the analysis phase,architecture-related factors are obtained through the Commit tool for selection while investigating the impact of code complexity metrics on porting.
+A scanning tool is built to get potential modification workload.
+Finally,an appropriate machine learning model is selected as a classification.
 
+% \subsection{Dataset}
+% We used the project upstream warehouse to build the data set,that projects mainly targeting C and C++ are from the OpenEuler list and GitHub,and invited 5 postgraduate students who are engaged in the research of RISC-V porting auxiliary tools to participate in the experimental evaluation.Specific evaluation methods can be found in \ref{sec:factor-1}. The evaluation scores are divided into three categories: low, medium, and high\citep{githuburl}.This includes 139 projects as training, testing, and validation datasets, while more than 80 additional projects were used as a tool effectiveness evaluation dataset. To gather insights from developers, the community, forums, and emails were utilized, resulting in over 51 meaningful feedback responses. In order to address the issue of data imbalance caused by collecting datasets solely from the openEuler mailing list, where more than 80\% of the projects were initially evaluated as having low porting complexity, a greater emphasis was placed on projects that had higher numbers of likes on GitHub and were deemed more important and active. Additionally, efforts were made to collect projects from the system bottom such as operating systems, kernel-level projects,mathematical computation libraries,and machine learning libraries to address RQ 2.
 
-\subsection{Dataset}
-We used the project upstream warehouse to build the data set,that projects mainly targeting C and C++ are from the OpenEuler list and GitHub,and invited 5 postgraduate students who are engaged in the research of RISC-V porting auxiliary tools to participate in the experimental evaluation.Specific evaluation methods can be found in \ref{sec:factor-1}. The evaluation scores are divided into three categories: low, medium, and high\citep{githuburl}.This includes 139 projects as training, testing, and validation datasets, while more than 80 additional projects were used as a tool effectiveness evaluation dataset. To gather insights from developers, the community, forums, and emails were utilized, resulting in over 51 meaningful feedback responses. In order to address the issue of data imbalance caused by collecting datasets solely from the openEuler mailing list, where more than 80\% of the projects were initially evaluated as having low porting complexity, a greater emphasis was placed on projects that had higher numbers of likes on GitHub and were deemed more important and active. Additionally, efforts were made to collect projects from the system bottom such as operating systems, kernel-level projects,mathematical computation libraries,and machine learning libraries to address RQ 2.
-
-\subsection{Method}
-\label{sec:method}
+\subsection{Implementation}
+\label{sec:Implementation}
 RAX obtains porting complexity vector through the CC calculation method and Arch\_code statistical value.
 
 \subsubsection{Lizard CC calculation scan function}
@@ -416,7 +424,10 @@ we form the Arch\_code dictionary:
   The system calls that do not support RISC-V have been filtered and collected currently.
   \textbf{Buildscripts} We locate architecture keywords in the build scripts.
  
-\section{Result and analysis}
+\subsection{Evaluation}
+\subsubsection{Dataset}
+We used the project upstream warehouse to build the data set,that projects mainly targeting C and C++ are from the OpenEuler list and GitHub,and invited 5 postgraduate students who are engaged in the research of RISC-V porting auxiliary tools to participate in the experimental evaluation.Specific evaluation methods can be found in \ref{sec:factor-1}. The evaluation scores are divided into three categories: low, medium, and high\citep{githuburl}.This includes 139 projects as training, testing, and validation datasets, while more than 80 additional projects were used as a tool effectiveness evaluation dataset. To gather insights from developers, the community, forums, and emails were utilized, resulting in over 51 meaningful feedback responses. In order to address the issue of data imbalance caused by collecting datasets solely from the openEuler mailing list, where more than 80\% of the projects were initially evaluated as having low porting complexity, a greater emphasis was placed on projects that had higher numbers of likes on GitHub and were deemed more important and active. Additionally, efforts were made to collect projects from the system bottom such as operating systems, kernel-level projects,mathematical computation libraries,and machine learning libraries to address RQ 2.
+\subsubsection{Result and Analysis}
 To answer RQ 2, based on the work of Chen Xiang et al. \cite{5128907}, aiming at the status quo of unbalanced datasets and small sample datasets, we try to use ensemble learning methods \cite{6509481}, SMOTE \cite{4271036}, and random oversampling methods for data preprocessing.
 Ultimately, we chose to train four models: Random Forest, Support Vector Machine, Adaboost, and Xgboost.
 By comparing multiple indicators, we select the Random Forest machine learning as the classifier, as shown in Table \ref{tab:evaluation}.
