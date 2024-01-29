@@ -120,7 +120,7 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-  In recent years, the open-source and reduced features of the RISC-V have led to active promotion of porting within the industry.Due to the lack of publicly available standards for assessing software portability, the software porting process for the RISC-V architecture has been predominantly reliant on expert experience, presenting obstacles. RAX is a automated tool which aids the C/C++ programmer in evaluating  complexity of projects during porting for RISC-V.RAX provides precise evaluation solutions and establishes a high-quality dataset for porting complexity assessment,enabling recommendations of suitable software with difficulty levels for developers of varying skill levels.We evaluate RAX on 72 popular and typical real-world C/C++ projects. The experimental result shows that 51 of them have been confirmed by developers within community.Interested users can explore the open-source implementation of RAX at \href{https://github.com/wangyuliu/RAX-2024}{https://github.com/wangyuliu/RAX-2024}, or watch the RAX video demo at \href{https://www.youtube.com/watch?v=SLphW3Ra4WM}{https://www.youtube.com/watch?v=SLphW3Ra4WM}.
+  In recent years, the open-source and reduced features of the RISC-V have led to active promotion of porting within the industry.Due to the lack of publicly available standards for assessing software portability, the software porting process for the RISC-V architecture has been predominantly reliant on expert experience, presenting obstacles. RAX is a automated tool which aids the C/C++ programmer in evaluating  complexity of software during porting for RISC-V.RAX provides precise evaluation solutions and establishes a high-quality dataset for porting complexity,enabling recommendations of suitable software with difficulty levels for developers of varying skill levels.We evaluate RAX on 72 popular and typical real-scenario C/C++ projects. The experimental result shows that 51 of them have been confirmed by developers within community.Interested users can explore the open-source implementation of RAX at \href{https://github.com/wangyuliu/RAX-2024}{https://github.com/wangyuliu/RAX-2024}, or watch the RAX video demo at \href{https://www.youtube.com/watch?v=SLphW3Ra4WM}{https://www.youtube.com/watch?v=SLphW3Ra4WM}.
 \end{abstract}
 
 %%
@@ -172,7 +172,7 @@
 \maketitle
 
 \section{Introduction}
-In recent years, the RISC-V Instruction Set Architecture (ISA) has garnered significant attention from academia, and particularly the industry, due to its open-source and reduced design\citep{2014The}.OpenEuler has joined RISC-V International organization, and RISC-V has officially become openEuler's official support architecture.The mainline integration of openEuler RISC-V 23.09 was finished by the RISC-V SIG.The main repository of openEuler 23.03 has successfully ported 4,244 software packages to the RISCV64,while the openEuler 23.09 main repository has currently completed the porting work of 5,694 software packages\citep{osti_1560132}.OpenCloudOS Kernel Stream 2207.2 kernel version adds support for the RISC-V 64 architecture\citep{osti_1560133}.  
+the RISC-V Instruction Set Architecture (ISA) has garnered significant attention from academia, and particularly the industry recently, due to its open-source and reduced design\citep{2014The}.OpenEuler has joined RISC-V International organization, and RISC-V has officially become openEuler's official support architecture.The mainline integration of openEuler RISC-V 23.09 was finished by the RISC-V SIG.The main repository of openEuler 23.03 has successfully ported 4,244 software packages to the RISCV64,while the openEuler 23.09 main repository has currently completed the porting work of 5,694 software packages\citep{osti_1560132}.OpenCloudOS Kernel Stream 2207.2 kernel version adds support for the RISC-V 64 architecture\citep{osti_1560133}.  
 
 Despite the rapid development of the RISC-V ISA, which foundational software such as operating systems and compilers are relatively mature, there is still a significant demand for porting a large number of application software\citep{2019Notary}.To adapt to the RISC-V,efficiently porting is greatly depending on domain expertise, and the lack of standardized evaluation criteria for software portability can lead to misallocation of resources.Therefore, it is desirable to propose a method that automates the assessment of porting complexity,this will enable different development teams to access software packages that are tailored to their proficiency levels, thus assisting distribution vendors in the porting of RISC-V architecture.  
 
@@ -180,11 +180,11 @@ Many related works focus on the code complexity and portability evaluation\cite{
 To overall these challenges, we propose RAX, a effective porting
 complexity evaluation tool.The contributions of this paper are as follows:
 \begin{itemize}
-  \item Identify one of the most important factors,Cyclomatic Complexity(CC), and investigate its significant value in porting scenarios.
+  \item We identify one of the most important factors,Cyclomatic Complexity(CC), exploring its significant value in porting scenarios.
   % \item We explore building high-quality datasets that can cover various porting scenarios to solve the problem of imbalanced datasets of existing tools.Tuning machine learning models to address ambiguous identification of samples of medium and hard complexity compared to other studies.
   \item We propose RAX, an automated tool to efficiently assess the complexity of software during porting to the RISC-V.
   % \item We nearly doubled the dataset compared to other tool,and verified the effectiveness of the evaluation of 51 extension projects in real porting scenarios through their respective communities or forums.Our findings indicate that RAX outperforms other tool, delivering substantial improvements in terms of accuracy.
-  \item Verify the effectiveness of RAX in real scenarios concentrating C/C++ projects. Our findings indicate that RAX outperforms other tool, delivering substantial improvements in terms of accuracy.
+  \item We verify the effectiveness of RAX in real scenarios concentrating C/C++ projects. Our findings indicate that RAX outperforms other tool, delivering substantial improvements in terms of accuracy.
 \end{itemize}
 
 The remainder of this paper is organized as follows. Section2 analyze architecture-related factors briefly. Section 3 presents the implementation and evaluation of RAX. Section 4 and 5 presents related work and conclusions.
@@ -195,26 +195,26 @@ The remainder of this paper is organized as follows. Section2 analyze architectu
 % During the analysis phase,architecture-related factors are obtained through the Commit tool for selection while investigating the impact of code complexity metrics on porting.
 % A scanning tool is built to get potential modification workload.
 % Finally,an appropriate machine learning model is selected as a classification.
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{figure1.pdf}
-  \caption{Flow chart for method to build RAX}
-  \label{fig:figure1}
-  \Description{Flow chart for method to build RAX}
-\end{figure}
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=\linewidth]{figure1.pdf}
+%   \caption{Flow chart for method to build RAX}
+%   \label{fig:figure1}
+%   \Description{Flow chart for method to build RAX}
+% \end{figure}
 \section{Motivation}
 To design RAX that assists developers with porting work,the following research questions are proposed:
 
 \textbf{RQ 1:} How can we select architecture-relevant actors that is fine-grained to design an automated assessment tool of porting complexity?
 
 \textbf{RQ 2:} How to solve the problem of vague classification of projects with medium and high porting complexity in existing tools?
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{figure2.pdf}
-  \caption{The relationship between score and CC}
-  \label{fig:figure2}
-  \Description{The relationship between score and CC}
-\end{figure}
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=\linewidth]{figure2.pdf}
+%   \caption{The relationship between score and CC}
+%   \label{fig:figure2}
+%   \Description{The relationship between score and CC}
+% \end{figure}
  
 To answer RQ 1,this section provides a validity analysis of porting-related factors on RAX.
 First,we try to use code complexity metrics to evaluate porting work.
@@ -222,6 +222,13 @@ The software metrics of code Cyclomatic Complexity(CC) can help developers make 
 At present, CC indicators are mostly used in project code quality assessment, defect inspection, code reconstruction, etc \cite{1991Cyclomatic}.
 During the porting process, developers will target a large number of project source codes,build scripts,assembly codes,and a macro understanding of the project is required in the early stage of porting.
 This part of the work has a lot of overlap with the scope of code complexity.Through our survey of community, we discovered that even though architectural code can be separated quite clearly from common code, when faced with large-scale projects, we still require numerous iterative tests to uncover unknown architectural code. Building upon this, we delve into the quantification of the significance of cyclomatic complexity in porting work.
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{figure2.pdf}
+  \caption{The relationship between score and CC}
+  \label{fig:figure2}
+  \Description{The relationship between score and CC}
+\end{figure}
 \subsection{Factor 1: Cyclomatic Complex(CC)}
 \label{sec:factor-1}
 We uses the lizard CC detection tool and optimize its functions,and it will introduce it in Section \ref{sec:Implementation}.
@@ -275,7 +282,7 @@ Continue to collect other factors that may reflect the porting complexity,and se
     \toprule
     & Full Assembly & Inline Assembly & Intrinsic & Builtin & System Call & CCM & Buildscripts & CC \\
     \midrule
-    Other tool & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \XSolidBrush \\
+   Other tool & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \XSolidBrush \\
     RAX & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold \\
   \bottomrule
 \end{tabular}
@@ -372,6 +379,13 @@ In the end,our tool selection was CC and the Arch\_code build scanning tool,as s
 
 \section{RAX}
 The following is an introduction to the process of RAX construction, as shown in Figure \ref{fig:figure1}.
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{figure1.pdf}
+  \caption{Flow chart for method to build RAX}
+  \label{fig:figure1}
+  \Description{Flow chart for method to build RAX}
+\end{figure}
 During the analysis phase,architecture-related factors are obtained through the Commit tool for selection while investigating the impact of code complexity metrics on porting.
 A scanning tool is built to get potential modification workload.
 Finally,an appropriate machine learning model is selected as a classification.
@@ -480,15 +494,15 @@ Within assessment, there are instances of inaccurate predictions. Analysis of so
 Nevertheless, the practical porting process benefits from an array of auxiliary tools designed to support developers. In response to valuable suggestions from developers within the OpenEuler community, we conducted an evaluation of the porting complexity for various versions of the Chromium.Initially, we were able to accurately assess the porting complexity, yielding promising results. However, when it came to evaluating the work involved in iterative updates between versions, existing tools proved insufficient for precise estimation.Sometimes developers design their work with generic code for unknown architecture and CPU architecture parts are well separated from the common code,that just need only to adjust the moderate amount of code to recognize RISC-V,like nuttx.
 \section{Related Work}
 The development of the RISC-V ecosystem is rapidly progressing.
-In the realm of scientific computing, Tine Blaise et al. \cite{osti_1830102} accomplished the porting of the OpenCL framework to RISC-V through a compiler framework, thereby expanding RISC-V's accessibility to a wider range of scientific computing applications.
-In the context of architectural porting of foundational software and libraries, Cheng Yuanhu et al. \cite{2017Slow} designed an embedded multi-instruction set processor,addressing the software ecosystem challenges present in the RISC-V embedded domain.
+In the realm of scientific computing, Tine Blaise et al. \cite{osti_1830102} accomplished the porting of the OpenCL framework to commodity RISC-V CPU, thereby expanding RISC-V's accessibility to a wider range of scientific computing applications.
+Cheng Yuanhu et al. \cite{2017Slow} designed an embedded multi-instruction set processor,addressing the software ecosystem challenges present in the RISC-V embedded domain.
 Therefore, auxiliary efforts in porting are highlighted as valuable endeavors.
-Our work consider code complexity from the perspective of its evaluation role in software evolution and maintenance,considering its influence on porting complexity assessment \cite{1993Software}.
+Our work consider code complexity from the perspective of its evaluation role in software evolution and maintenance,mapping its influence on porting complexity assessment \cite{1993Software}.
 Alvares et al. \cite{7844689} proposed using the development team's ``tolerance'' for code complexity to infer team development capabilities and performance indicators for projects.
 Vard et al. \cite{2017Evaluating} emphasized that the internal quality of software impacts developers' capabilities and maintenance duration.
 They conducted a comprehensive study on various existing code complexity metrics' validity and suggested incorporating empirically observed code features as complexity triggers.
 \section{Conclusion}
-We propose RAX, with the aim of recommending projects of varying porting difficulties to developers. We incorporate the code complexity to reflect developers' actual workload. We verified the effectiveness of the evaluation of 51 extension projects in real porting scenarios through their respective communities or forums. Observed significant performance improvements compared to existing tools.Moreover, RAX provides developers with the functionality to locate target code segments.Our next steps involve attempting text classification methods to categorize the text results of the original tool, designing more granular statistical methods for architecture-related factors.
+The software porting work for RISC-V is being actively promoted, but it still faces the challenge of over-reliance on expert knowledge.We propose RAX, with the aim of recommending projects of varying porting difficulties to developers. Incorporate the code complexity to reflect developers' actual workload. We verified the effectiveness of the evaluation of 51 extension projects in real porting scenarios through their respective communities or forums. Observed significant performance improvements compared to existing tools.Moreover, RAX provides developers with the functionality to locate target code segments.Our next steps involve attempting text classification methods to categorize the text results of the original tool, designing more granular statistical methods for architecture-related factors.
 %%
 %% The acknowledgments section is defined using the "acks" environment
 %% (and NOT an unnumbered section). This ensures the proper
