@@ -203,6 +203,7 @@ The remainder of this paper is organized as follows.In Section 2,we briefly anal
 %   \Description{Flow chart for method to build RAX}
 % \end{figure}
 \section{Motivation}
+\label{sec:factor}
 To help developers more accurately assess the porting complexity of C/C++ projects, we aim to answer the following research questions:
 
 \textbf{RQ 1:} How can we select architecture-relevant factors that is fine-grained to design an automated evaluation tool of porting complexity?
@@ -226,16 +227,31 @@ As we all known, the metrics of projects porting complexity is influenced by man
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{figure2.pdf}
-  \caption{The relationship between score and CC}
+  \caption{The Relationship between Score and CC}
   \label{fig:figure2}
-  \Description{The relationship between score and CC}
+  \Description{The Relationship between Score and CC}
 \end{figure}
 \subsection{Factor 1: Cyclomatic Complex(CC)}
 \label{sec:factor-1}
 First,we try to use code complexity metrics to evaluate porting work.
-CC can help developers make macro judgments on software complexity and maintenance difficulty. By evaluating potential porting difficulties,code complexity metrics helps the tool improve accuracy \cite{2005Exploring}.At present, CC indicators are mostly used in evaluating code quality, inspecting defect, reconstructing code, etc \cite{1991Cyclomatic}.
-During the porting process, developers will target a large number of project source codes,build scripts,assembly codes,and a macro understanding of the project is required in the early stage of porting.This part of the work has a lot of overlap with the scope of code complexity.Through our survey of community, we discovered that even though architectural code can be separated quite clearly from common code, when faced with large-scale projects, we still require numerous iterative tests to uncover unknown architectural code.
-Based on the above, we use the lizard CC detection tool and optimize its functions,and it will introduce it in Section \ref{sec:Implementation}.
+CC can help developers make macro judgments on software complexity and maintenance difficulty,and helps the tool improve accuracy \cite{2005Exploring}.
+% At present, CC indicators are mostly used in evaluating code quality, inspecting defect, reconstructing code, etc \cite{1991Cyclomatic}.
+During the porting process, developers will target a large number of project source codes,and a macro understanding of the project is required in the early stage of porting.This part of the work has a lot of overlap with the scope of code complexity.Through our survey of community, we discovered that even though architectural code can be separated quite clearly from common code, when faced with large-scale projects, we still require numerous iterative tests to uncover unknown architectural code.
+Based on the above, we use the lizard CC detection tool and optimize its functions.This paper proposes a new CC method:
+ First, we calculate the function-level CC for all files in the project using McCabe's method. Following Liu's mention of System Cyclomatic Complexity (SCC) in software evolution assessment techniques based on code change detection \cite{liuhuihui00}, we define SCC as the total sum of function-level values in the system.
+  Our CC calculation approach is expressed by equation (1) to (3),where lowercase cc represents the cyclomatic complexity at the function or file level.The uppercase CC represents the overall cyclomatic complexity of the software package,serving as a crucial factor in our tool.Here, |E| denotes the number of edges in the function control flow graph,and |N| represents the number of nodes.The function control flow graph is constructed based on branching structures such as if, while, and switch statements. 
+  
+  \begin{equation}
+    {cc}({function}) = \lvert E \rvert - \lvert N \rvert + 2
+    % \sum_{i=1}^{n} x_i
+    \end{equation}
+    \begin{equation}
+      {cc}({file}) =  \sum_{i=1}^{n} 
+      {cc}({function})
+      \end{equation}
+      \begin{equation}
+        {CC} =  \sum_{i=1}^{k} {cc}({file})
+        \end{equation}
 this section calculate the correlation coefficient using the Spearman Rank.
 We invited five Master's students who are engaged in research on porting auxiliary tools to score the porting complexity(score) of 131 projects adapted for RISC-V,collected from the OpenEuler list\citep{stage2023} and GitHub.
 According to the collection of Internet events, log analysis, source code dismantling, and similar project analogy \cite{liangguanyu2020}, we form a scoring interval in the range of $[0,5]$.
@@ -247,11 +263,29 @@ This is because developers need a holistic understanding of the project during t
 
 
 Second, we consider the effectiveness of the architecture-related code structure proposed by other tool and conduct comparative experiments using more potential factors.
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{figure3.pdf}
+  \caption{The Heat Map of Pearson Correlation}
+  \label{fig:figure3}
+  \Description{The Correlation}
+\end{figure}
 \subsection{Factor2:Arch\_code}
 
 We select factors with the greatest potential from existing tool and define Arch\_code.
 Arch\_code includes assembly code, conditional compilation and macro structure(CCM), Intrinsic functions, Builtin functions, architecture-related build scripts, and system calls.
 We use an automated tool to obtain statistics of lines and frequencies of Arch\_code.
+We form the Arch\_code dictionary:
+(1)\textit{Conditional compilation and architecture macros} Use conditional compilation statements, such as ``\texttt{if defined}'', ``\texttt{ifdef}'', in conjunction with all possible architecture macros,
+  ``\texttt{\_\_x86\_64\_\_}''.
+  We use an algorithm similar to bracket matching to cover all the code within macros, avoiding the impact of nested layers.
+  (2)\textit{Assembly} We use matching forms such as ``\texttt{\_\_asm\_\_}'' and ``\texttt{\_\_volatile\_\_}''.
+  In future work,we will consider striving to achieve the currently unachievable architecture identification function of assembly code;
+  (3)\textit{Intrinsic and Builtin} 
+  We compile dictionaries of Intrinsic and Builtin functions based on official documentation from x86\cite{x86intrin}.In the future,we may assign difficulty weights to them.
+  (4)\textit{System calls} The system calls that do not support RISC-V have been filtered and collected currently.
+  (5)\textit{Buildscripts} We locate architecture keywords in the build scripts.
+
 
 We further collect other factors that may reflect the porting complexity,and select the following parameters through the Commit analyzer:architecture-related code lines, architecture-related files, and architecture keywords.architecture-related code lines and files is located using the keywords of the RISC-V architecture, such as riscv, rv32, rv64, RISC-V, RISCV and so on.
 %Correlation comparison between Arch\_code and other factors acquired by Commit analyzer,as shown in Table \ref{tab:Tool}:
@@ -296,15 +330,7 @@ We further collect other factors that may reflect the porting complexity,and sel
 \end{table*}
 
 
-Figure \ref{fig:figure3} shows the correlation comparison between Arch\_code,CC and other factors acquired by Commit analyzer:
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{figure3.pdf}
-  \caption{The heat map of pearson correlation}
-  \label{fig:figure3}
-  \Description{The Correlation}
-\end{figure}
-The results indicate that Arch\_code and CC has a higher correlation with score compared to other factors, and we use Peason correlation method to build the heat map.
+Figure \ref{fig:figure3} shows the correlation comparison between Arch\_code,CC and other factors acquired by Commit analyzer:The results indicate that Arch\_code and CC has a higher correlation with score compared to other factors, and we use Peason correlation method to build the heat map.
 The use of only architecture keywords for statistics yields moderate effectiveness because keywords can only be detected from comments and macro sections of Git commits, while critical porting code may lack these keywords,but the number of keywords can reflect the amount of porting modification from the side.
 Arch\_code show a correlation of 0.45 to 0.75 with score, indicating a strong relationship.
 However, using a single factor alone does not result in a significantly strong correlation, as the combined modifications of these factors make up the porting workload.
@@ -386,7 +412,7 @@ In the end,our tool selection was CC and the Arch\_code build scanning tool,as s
 
 \section{RAX}
 Since we identify architecture-relevant important
-factors affecting porting efficiency, we implement a fine-grained and automated tool to evaluate complexity. Figure \ref{fig:figure1} shows the entire technology roadmap in three parts such as Analysis, Data Collection and Evaluation. RAX can be deployed easily by installing dependencies, highlighting its convenience and user-friendliness.
+factors affecting porting efficiency, we implement a fine-grained and automated tool to evaluate complexity. Figure \ref{fig:figure1} shows the entire technology roadmap in three parts such as Analysis, Data Collection and {Evaluation. RAX can be deployed easily by installing dependencies, highlighting its convenience and user-friendliness.
 % \textcolor{blue}{The following is an introduction to the process of RAX construction, as shown in Figure \ref{fig:figure1}.
 % During the analysis phase,architecture\-related factors are obtained through the Commit tool for selection while investigating the impact of code complexity metrics on porting.
 % A scanning tool is built to get potential modification workload. Finally,an appropriate machine learning model is selected as a classification.}
@@ -396,7 +422,7 @@ factors affecting porting efficiency, we implement a fine-grained and automated 
   \includegraphics[width=\linewidth]{figure1.pdf}
   \caption{Flow Chart of RAX}
   \label{fig:figure1}
-  \Description{Flow chart for method to build RAX}
+  \Description{Flow Chart for Method to Build RAX}
 \end{figure}
 
 % \subsection{Dataset}
@@ -413,37 +439,37 @@ By analyzing the correlation coefficient (Pearson's) between the keyword coverag
 Based on these results, analyze that our tool try to effectively assess the porting difficulty between two architectures. It is not as simple as adding up the modification amounts for different architectures, as it may only reflect an increase in code volume. Moreover, due to the large differences in row-based statistical results caused by the differences in code structure reflected by each architecture, this approach that easily considers all architectures simultaneously without considering the code structure and architectural weight lead to ambiguous outcomes.Therefore, based on these experiments, we still select x86 to build Arch\_code scan function, given its mainstream position.
 \subsubsection{Dataset Collection}
 % We used the project upstream warehouse to build the data set,which mainly targeting C and C++ are from the OpenEu-ler list and GitHub,and invited 5 postgraduate students who are engaged in the research of RISC-V porting auxiliary tools to participate in the experimental evaluation.Specific evaluation methods can be found in \ref{sec:factor-1}. The evaluation scores are divided into three categories: low, medium, and high\citep{githuburl}.This includes 139 projects as training, testing, and validation datasets, while 72 additional projects were used as a tool effectiveness evaluation dataset. To gather insights from developers, the community, forums, and emails were utilized, resulting in over 51 meaningful feedback responses. 
-We used the project upstream warehouse to build the data set,which mainly targeting C and C++ are from the OpenEuler list and GitHub\citep{stage2023}.In order to address the issue of data imbalance caused by collecting datasets solely from the openEuler mailing list, where more than 80\% of the projects were initially evaluated as having low porting complexity, a greater emphasis was placed on projects that had higher numbers of likes on GitHub and were deemed more important and active. Additionally, efforts were made to collect projects from the system bottom such as operating systems, kernel-level projects,mathematical computation libraries,and machine learning libraries.
+We used the project upstream warehouse to build the data set,which mainly targeting C and C++ are from the OpenEuler list and GitHub\citep{stage2023}.We obtain the complexity vector through the designed method \ref{sec:factor}.In order to address the issue of data imbalance caused by collecting datasets solely from the openEuler mailing list, where more than 80\% of the projects were initially evaluated as having low porting complexity, a greater emphasis was placed on projects that had higher numbers of likes on GitHub and were deemed more important and active. Additionally, efforts were made to collect projects from the system bottom such as operating systems, kernel-level projects,mathematical computation libraries,and machine learning libraries.
 
-\subsubsection{Implementation of RAX Tool}
-RAX obtains porting complexity vector through the CC calculation method and Arch\_code statistical value.\\
-This paper proposes a new CC method:
- First, we calculate the function-level CC for all files in the project using McCabe's method. Following Liu's mention of System Cyclomatic Complexity (SCC) in software evolution assessment techniques based on code change detection \cite{liuhuihui00}, we define SCC as the total sum of function-level values in the system.
-  Our CC calculation approach is expressed by equation (1) to (3),where lowercase cc represents the cyclomatic complexity at the function or file level.The uppercase CC represents the overall cyclomatic complexity of the software package,serving as a crucial factor in our tool.Here, |E| denotes the number of edges in the function control flow graph,and |N| represents the number of nodes.The function control flow graph is constructed based on branching structures such as if, while, and switch statements. 
+\subsubsection{Evaluation}
+% RAX obtains porting complexity vector through the CC calculation method and Arch\_code statistical value.\\
+% This paper proposes a new CC method:
+%  First, we calculate the function-level CC for all files in the project using McCabe's method. Following Liu's mention of System Cyclomatic Complexity (SCC) in software evolution assessment techniques based on code change detection \cite{liuhuihui00}, we define SCC as the total sum of function-level values in the system.
+%   Our CC calculation approach is expressed by equation (1) to (3),where lowercase cc represents the cyclomatic complexity at the function or file level.The uppercase CC represents the overall cyclomatic complexity of the software package,serving as a crucial factor in our tool.Here, |E| denotes the number of edges in the function control flow graph,and |N| represents the number of nodes.The function control flow graph is constructed based on branching structures such as if, while, and switch statements. 
   
-  \begin{equation}
-    {cc}({function}) = \lvert E \rvert - \lvert N \rvert + 2
-    % \sum_{i=1}^{n} x_i
-    \end{equation}
-    \begin{equation}
-      {cc}({file}) =  \sum_{i=1}^{n} 
-      {cc}({function})
-      \end{equation}
-      \begin{equation}
-        {CC} =  \sum_{i=1}^{k} {cc}({file})
-        \end{equation}
-We form the Arch\_code dictionary:
-(1)\textit{Conditional compilation and architecture macros} Use conditional compilation statements, such as ``\texttt{if defined}'', ``\texttt{ifdef}'', in conjunction with all possible architecture macros,
-  ``\texttt{\_\_x86\_64\_\_}''.
-  We use an algorithm similar to bracket matching to cover all the code within macros, avoiding the impact of nested layers.
-  (2)\textit{Assembly} We use matching forms such as ``\texttt{\_\_asm\_\_}'' and ``\texttt{\_\_volatile\_\_}''.
-  In future work,we will consider striving to achieve the currently unachievable architecture identification function of assembly code and identify assembly code in the form of instructions;
-  (3)\textit{Intrinsic and Builtin} 
-  We compile dictionaries of Intrinsic and Builtin functions based on official documentation from x86\cite{x86intrin}.In the future,we may assign difficulty weights to them.
-  (4)\textit{System calls} Considering glibc's support for system call encapsulation, reorganize the sys-call dictionary.
-  The system calls that do not support RISC-V have been filtered and collected currently.
-  (5)\textit{Buildscripts} We locate architecture keywords in the build scripts.
-
+%   \begin{equation}
+%     {cc}({function}) = \lvert E \rvert - \lvert N \rvert + 2
+%     % \sum_{i=1}^{n} x_i
+%     \end{equation}
+%     \begin{equation}
+%       {cc}({file}) =  \sum_{i=1}^{n} 
+%       {cc}({function})
+%       \end{equation}
+%       \begin{equation}
+%         {CC} =  \sum_{i=1}^{k} {cc}({file})
+%         \end{equation}
+% We form the Arch\_code dictionary:
+% (1)\textit{Conditional compilation and architecture macros} Use conditional compilation statements, such as ``\texttt{if defined}'', ``\texttt{ifdef}'', in conjunction with all possible architecture macros,
+%   ``\texttt{\_\_x86\_64\_\_}''.
+%   We use an algorithm similar to bracket matching to cover all the code within macros, avoiding the impact of nested layers.
+%   (2)\textit{Assembly} We use matching forms such as ``\texttt{\_\_asm\_\_}'' and ``\texttt{\_\_volatile\_\_}''.
+%   In future work,we will consider striving to achieve the currently unachievable architecture identification function of assembly code and identify assembly code in the form of instructions;
+%   (3)\textit{Intrinsic and Builtin} 
+%   We compile dictionaries of Intrinsic and Builtin functions based on official documentation from x86\cite{x86intrin}.In the future,we may assign difficulty weights to them.
+%   (4)\textit{System calls} Considering glibc's support for system call encapsulation, reorganize the sys-call dictionary.
+%   The system calls that do not support RISC-V have been filtered and collected currently.
+%   (5)\textit{Buildscripts} We locate architecture keywords in the build scripts.
+In our study, we opted to utilize Random Forest machine learning model for conducting training and testing to obtain the final classifier model. The extended dataset was used as an additional input for the classifier to acquire evaluation results. We subsequently performed evaluations on 72 projects and sought community feedback during the tool's effectiveness evaluation phase.
 
 
 % \subsubsection{Arch\_code scan function}
@@ -467,12 +493,12 @@ We form the Arch\_code dictionary:
 \subsubsection{Dataset}
  To evaluate RAX, We chose typical and popular C and C++ projects from upstream warehouse of the OpenEuler and GitHub\citep{stage2023}. First, we searched keywords "rv" or "riscv" and collected 139 projects as our training and testing dataset. Then, five postgraduate students are invited to tag the porting auxiliary for these projects. The evaluation scores are divided into three categories:low, medium, and high\citep{githubss}. Second, models are trained and tested based on the 139 projects. Third, to evaluate the RAX, additional 72 projects are collected and evaluated from GitHub. To gather response from developers, the community, forums, and emails were utilized. 
 \subsubsection{Result and Analysis}
-To answer RQ 2, based on the work of Chen Xiang et al. \cite{5128907}, aiming at the status quo of unbalanced datasets and small sample datasets, we try to use ensemble learning methods \cite{6509481}, SMOTE \cite{4271036}, and random oversampling methods for data preprocessing.
-Ultimately, we chose to train four models: Random Forest, Support Vector Machine, Adaboost, and Xgboost.
+We used ensemble learning methods \cite{6509481}, SMOTE \cite{4271036}, and random oversampling methods for data preprocessing\cite{5128907} addressing the problem of unbalanced datasets and small sample datasets.
+% Ultimately, we chose to train four models:Random Forest, Support Vector Machine, Adaboost, and Xgboost.
 By comparing multiple indicators, we select the Random Forest machine learning model as the classifier, as shown in Table \ref{tab:evaluation}.
 
 \begin{table}
-  \caption{Experimental results of models}
+  \caption{Experimental Results of Models}
   \label{tab:evaluation}
   \begin{tabular}{ccccc}
     \toprule
@@ -488,7 +514,7 @@ We continued to expand 72 projects as a supplementary data set, and the predicti
 Github presents comparison\cite{githubss} with the porting complexity evaluation tool developed by Du et al. across various projects, the comparison results are shown in Table \ref{tab:effectiveness}.Through real-world evaluations within the developer community, our tool has exhibited a significant improvement in accuracy, surpassing other comparable tools by a margin of 15.6\%. In Github, we provide a comprehensive compilation of the community's valuable feedback comments, accompanied by the relevant web links for further reference and validation.
 
 \begin{table}
-  \caption{Tool effectiveness comparison from community feedback}
+  \caption{Tool Effectiveness Comparison from Community Feedback}
   \label{tab:effectiveness}
   \begin{tabular}{ccccc}
     \toprule
@@ -523,7 +549,7 @@ However,there is still a lack of fine-grained assistance tools for architecture 
 % Our work consider code complexity from the perspective of its evaluation role in software evolution and maintenance,mapping its influence on porting complexity evaluation\cite{1993Software}.
 Alvares et al. \cite{7844689} proposed using the development team's ``tolerance'' for code complexity to infer team development capabilities and performance indicators for projects.
 Vard et al. \cite{2017Evaluating} emphasized that the internal quality of software impacts developers' capabilities and maintenance duration.
-They conducted a comprehensive study on various existing code complexity metrics' validity and suggested incorporating empirically observed code features as complexity triggers.We have pioneered the application of code complexity metrics in the domain of porting assessment, while existing research primarily focuses on code refactoring and defect detection\cite{1993Software}.
+They conducted a comprehensive study on various existing code complexity metrics' validity and suggested incorporating empirically observed code features as complexity triggers.We have pioneered the application of code complexity metrics in the domain of porting assessment, while existing research primarily focuses on code refactoring and defect detection\cite{1993Software},\cite{1991Cyclomatic}.
 \section{Conclusion}
 The software porting work for RISC-V is being actively promoted, but it still faces the challenge of over-reliance on expert knowledge.We propose RAX, with the aim of recommending projects of varying porting difficulties to developers. Our method incorporate the code complexity and architectural code to reflect developers' actual workload. We verified the effectiveness of the evaluation of 51 extension projects in real porting scenarios through their respective communities or forums. Observed significant performance improvements compared to existing tools.Moreover, RAX provides developers with the functionality to locate target code segments.Our next steps involve attempting text classification methods to categorize the text results of the original tool, designing more granular statistical methods for architecture-related factors.
 %%
