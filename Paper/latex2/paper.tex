@@ -16,6 +16,7 @@
 \usepackage{multirow}
 \usepackage{svg}
 \usepackage{xcolor}
+\usepackage{bbding}
 
 
 \newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO:#1]}}}
@@ -241,7 +242,7 @@ Second, we consider the effectiveness of the architecture binding code structure
 \subsubsection{Factor2:Arch\_code}
 
 Based on the analysis of previous evaluation tools, we selected factors with the greatest potential and that can be extracted through automated methods to define Arch\_code.
-Arch\_code includes assembly code, conditional compilation and macro structure, Intrinsic functions, Builtin functions, architecture-related build scripts, and system calls.
+Arch\_code includes assembly code, conditional compilation and macro(ccm) structure, Intrinsic functions, Builtin functions, architecture-related build scripts, and system calls.
 We use an automated architecture binding code scanning tool to obtain statistics on the number of lines and frequencies of Arch\_code.
 
 Continue to collect other factors that may affect the evaluation of porting complexity,and select the following parameters through the Commit analyzer:architecture-related code lines, architecture-related files, and architecture keywords.
@@ -310,16 +311,18 @@ In the end,our tool selection was CC and the Arch\_code build scanning tool,as s
 
 
 \begin{table}
-  \caption{Tool factors comparison}
+   \caption{Tool factors comparison}
+   \resizebox{0.5\textwidth}{!}{
   \label{tab:Tool}
   \begin{tabular}{ccccccc}
     \toprule
-    & Asm & Intrinsic & Builtin & Conditional compilation and macro & Buildscripts & CC \\
+    & Asm & Intrinsic & Builtin & CCM & Buildscripts & CC \\
     \midrule
-    Toolone & 1 & 1 & 1 & 1 & 1 & 0\\
-    RAX & 1 & 1 & 1 & 1 & 1 & 1 \\
+    Toolone & \Checkmark & \Checkmark  & \Checkmark  & \Checkmark  &\Checkmark  & \XSolid\\
+    RAX & \Checkmark  & \Checkmark  & \Checkmark  & \Checkmark  & \Checkmark & \Checkmark  \\
   \bottomrule
 \end{tabular}
+}
 \end{table}
 
 % \begin{table}
