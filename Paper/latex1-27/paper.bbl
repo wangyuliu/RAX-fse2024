@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{26}
+\begin{thebibliography}{25}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -74,26 +74,14 @@
 \tempurl}
 
 
-\bibitem[\protect\citeauthoryear{??}{git}{2023a}]%
+\bibitem[\protect\citeauthoryear{??}{git}{2023}]%
         {githubss}
- \bibinfo{year}{2023}\natexlab{a}.
+ \bibinfo{year}{2023}\natexlab{}.
 \newblock \showarticletitle{porting complexity evaluation details}.
 \newblock  (\bibinfo{year}{2023}).
 \newblock
 \urldef\tempurl%
 \url{https://github.com/wangyuliu/RAX-2024/Data}
-\showURL{%
-\tempurl}
-
-
-\bibitem[\protect\citeauthoryear{??}{git}{2023b}]%
-        {githuburl}
- \bibinfo{year}{2023}\natexlab{b}.
-\newblock \showarticletitle{porting complexity experimental evaluation}.
-\newblock  (\bibinfo{year}{2023}).
-\newblock
-\urldef\tempurl%
-\url{https://github.com/wangyuliu/RAX-2024}
 \showURL{%
 \tempurl}
 
