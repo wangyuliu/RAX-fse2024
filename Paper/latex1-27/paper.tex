@@ -203,11 +203,11 @@ complexity evaluation tool which accurately locates the CPU architecture code an
 %   \Description{Flow chart for method to build RAX}
 % \end{figure}
 \section{Motivation}
-We propose the following research questions:
+\textcolor{red}{To help developers more accurately assess the complexity of C/C++ projects, we aim to answer the following research questions:}
 
-\textbf{RQ 1:} How can we select architecture-relevant factors that is fine-grained to design an automated evaluation tool of porting complexity?
+\textbf{RQ 1:} How can we identify architecture-relevant important factors affecting porting efficiency?
 
-\textbf{RQ 2:} How to solve the problem of fuzzy classification of projects with medium and high porting complexity in existing tools?
+\textbf{RQ 2:} \textcolor{red}{ How to implement fine-grained and automated tools to help developers accurately assess the complexity of their projects in real world. } \textcolor{blue}{How to solve the problem of fuzzy classification of projects with medium and high porting complexity in existing tools?}
 % \begin{figure}
 %   \centering
 %   \includegraphics[width=\linewidth]{figure2.pdf}
@@ -215,13 +215,13 @@ We propose the following research questions:
 %   \label{fig:figure2}
 %   \Description{The relationship between score and CC}
 % \end{figure}
- 
-To answer RQ 1,this section provides a validity analysis of porting-related factors on RAX.
-First,we try to use code complexity metrics to evaluate porting work.
+\textcolor{red}{As we all known, the metrics of projects complexity is influenced by many factors, such as XXX,XXX. To answer RQ 1, we introduce the code Cyclomatic Complexity(CC) and Arch\_code.}
+
+\textcolor{blue}{To answer RQ 1, First, we try to use code complexity metrics to evaluate porting work.
 The software metrics of code Cyclomatic Complexity(CC) can help developers make macro judgments on software complexity and maintenance difficulty. By evaluating potential and hidden porting difficulties,code complexity helps the tool improve accuracy \cite{2005Exploring}.
 At present, CC indicators are mostly used in evaluating code quality, inspecting defect, reconstructing code, etc \cite{1991Cyclomatic}.
 During the porting process, developers will target a large number of project source codes,build scripts,assembly codes,and a macro understanding of the project is required in the early stage of porting.
-This part of the work has a lot of overlap with the scope of code complexity.Through our survey of community, we discovered that even though architectural code can be separated quite clearly from common code, when faced with large-scale projects, we still require numerous iterative tests to uncover unknown architectural code. Building upon this, we study the quantification of the significance of cyclomatic complexity in porting work.
+This part of the work has a lot of overlap with the scope of code complexity.Through our survey of community, we discovered that even though architectural code can be separated quite clearly from common code, when faced with large-scale projects, we still require numerous iterative tests to uncover unknown architectural code. Building upon this, we study the quantification of the significance of cyclomatic complexity in porting work.}
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{figure2.pdf}
