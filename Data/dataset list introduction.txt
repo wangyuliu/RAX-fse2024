@@ -1,5 +1,3 @@
-dataset-train-test-merged-cn.csv   ------ Chinese version of porting complexity dataset(used for building classifier model）
-dataset-train-test-merged-en.csv      ------ English version of porting complexity dataset(used for building classifier model）
-Developer feedback details             -------Details of evaluation opinions provided by community developers, including levels of evaluation and specific evaluation content
-Evaluated score from professional  ------- The labeling of dataset by researchers
-Extended porting complexity data set.csv   -------Extended porting complexity data set(used for community evaluation）
+dataset-train-test-merged-en.csv      ------ English version of porting complexity dataset(used for building classifier model）,139 projects
+Developer feedback details             -------Details of evaluation opinions provided by community developers, including levels of evaluation and specific evaluation content,72 projects
+Manual score    ------- The labeling of dataset from 5 Postgraduates
