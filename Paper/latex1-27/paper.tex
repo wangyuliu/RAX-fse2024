@@ -122,7 +122,7 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-  In recent years, the open-source and the advantages of reduced ISA of the RISC-V architecture are attracting active promotion of porting within the industry.Due to the lack of public available standards for assessing software portability, the software porting process for the RISC-V architecture has been predominantly reliant on expert experience, which is inefficient and time consuming. RAX is a automated tool which aids the C/C++ programmer in evaluating  complexity of software during porting for RISC-V.RAX provides precise evaluation solutions and builds a high-quality dataset for porting complexity,enabling recommendations of suitable software with difficulty levels for developers of varying skill levels.We evaluate RAX on 72 popular and typical real-scenario C/C++ projects. The experimental result shows that 51 of them have been confirmed by developers within community.Interested users can explore the open-source implementation of RAX at \href{https://github.com/wangyuliu/RAX-2024}{https://github.com/wangyuliu/RAX-2024}, or watch the RAX video demo at \href{https://youtu.be/g_e4VhG4kkM}{https://youtu.be/g_e4VhG4kkM}.
+  In recent years, the open-source and the advantages of reduced ISA of the RISC-V architecture are attracting active promotion of porting within the industry.Due to the lack of public available standards for assessing software portability, the software porting process for the RISC-V architecture has been predominantly reliant on expert experience, which is inefficient and time consuming. RAX is a automated tool which aids the C/C++ programmer in evaluating  complexity of software during porting for RISC-V.RAX provides precise evaluation solutions and builds a high-quality dataset for porting complexity,enabling recommendations of suitable software with difficulty levels for developers of varying skill levels.We evaluate RAX on 72 popular and typical real-scenario C/C++ projects. The experimental result shows that 51 of them have been confirmed by developers within community.Interested users can explore the open-source implementation of RAX at \href{https://github.com/wangyuliu/RAX-2024}{https://github.com/wangyuliu/RAX-2024}, or watch the RAX video demo at \href{https://youtu.be/g\_e4VhG4kkM}{https://youtu.be/g\_e4VhG4kkM}.
 \end{abstract}
 
 %%
@@ -327,9 +327,9 @@ We further collect other factors that may reflect the porting complexity,and sel
   \label{tab:Tool}
   \begin{tabular}{ccccccccc}
     \toprule
-    & Full Assembly & Inline Assembly & Intrinsic & Builtin & System Call & CCM & Buildscripts & CC \\
+    & CC & Full Assembly & Inline Assembly & Intrinsic & Builtin & System Call & CCM & Buildscripts  \\
     \midrule
-   Tool\citep{2023du} & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \XSolidBrush \\
+   Tool\citep{2023du} & \XSolidBrush & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold  \\
     RAX & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold & \CheckmarkBold \\
   \bottomrule
 \end{tabular}
