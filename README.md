@@ -3,7 +3,7 @@
 
 ## RAX Introduction
 
-RAX is a porting complexity assessment tool for RISC-V. It provides automated tools to quickly determine the difficulty of software architecture porting, and recommends software to developers that adapts to their development capabilities and existing resources. For large-scale porting adaptation work has practical significance.
+RAX is a porting complexity assessment tool for RISC-V. It provides automated tools to quickly determine the difficulty of software architecture porting, and recommends software to developers that adapts to their development capabilities and existing resources. For large-scale porting adaptation work has practical significance.RAX video demo at https://youtu.be/g_e4VhG4kkM.
 
 1、Overview and Requirements of RAX Tools
 ----------
